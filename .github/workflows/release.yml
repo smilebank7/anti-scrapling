@@ -91,7 +91,7 @@ jobs:
 
       - name: Build JS bundle
         working-directory: web/challenge
-        run: npm ci --omit=dev && npm run build
+        run: npm ci && npm run build
 
       - name: Copy bundle into embed assets
         run: |
