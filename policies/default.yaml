@@ -7,7 +7,9 @@ listener:
 token:
   secret_file: /etc/anti-scrapling/token.key
   ttl: 24h
-  bind_to: [ip, ua, ja3]
+  # Token binding fields. ja3/ja4 require server-side TLS ClientHello capture
+  # wired into the proxy handler (planned v0.2); for v0.1 the safe default is ip+ua.
+  bind_to: [ip, ua]
 
 policy:
   default: challenge

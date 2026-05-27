@@ -99,7 +99,7 @@ import { AntiScraplingGuard } from '@anti-scrapling/node/nestjs';
 export class AppModule {}
 ```
 
-The guard runs before every controller method. Per-route opt-out (a `@SkipAntiScrapling()` decorator) is not yet implemented; it is planned for v0.2. Until then, register the guard only on specific modules or use Express middleware instead of the global guard for finer-grained control.
+The guard runs before every controller method. A per-route opt-out decorator is planned for v0.2. Until then, register the guard only on specific modules or use Express middleware instead of the global guard for finer-grained control.
 
 ### Node SDK configuration options
 
@@ -162,7 +162,7 @@ app.add_middleware(
 
 ### FastAPI: per-route dependency
 
-A `require_clean` FastAPI dependency (raises `HTTPException` on non-ALLOW verdicts) is planned for v0.2. Until then, apply `AntiScraplingMiddleware` globally and use `allow` rules in the policy YAML to exempt specific paths.
+A per-route FastAPI dependency that raises `HTTPException` on non-ALLOW verdicts is planned for v0.2. Until then, apply `AntiScraplingMiddleware` globally and use `allow` rules in the policy YAML to exempt specific paths.
 
 ### Flask decorator
 
