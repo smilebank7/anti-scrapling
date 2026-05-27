@@ -5,15 +5,15 @@ import { describe, expect, it } from 'vitest';
 import { antiScrapling } from '../src/express.js';
 import type { Decision } from '../src/types.js';
 
-function makeDecision(verdict: Decision['Verdict'], reasons: string[] = []): Decision {
+function makeDecision(verdict: Decision['verdict'], reasons: string[] = []): Decision {
   return {
-    Verdict: verdict,
-    Score: verdict === 'DENY' ? 100 : 0,
-    Signals: [],
-    Reasons: reasons,
-    PolicyName: 'test',
-    Timestamp: 0,
-    RequestID: 'test',
+    verdict: verdict,
+    score: verdict === 'DENY' ? 100 : 0,
+    signals: [],
+    reasons: reasons,
+    policy_name: 'test',
+    timestamp: 0,
+    request_id: 'test',
   };
 }
 

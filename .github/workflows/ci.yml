@@ -30,7 +30,7 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version: '1.25'
-      - uses: golangci/golangci-lint-action@v6
+      - uses: golangci/golangci-lint-action@v7
         with:
           version: v2.1
 
@@ -106,7 +106,7 @@ jobs:
       - name: Build daemon
         run: go build -o bin/antiscrapling ./cmd/antiscrapling
       - name: Install Python attacker deps
-        run: pip install pytest httpx curl-cffi scrapling browserforge
+        run: pip install pytest httpx curl-cffi requests playwright scrapling browserforge
       - name: Start dummy upstream
         run: |
           mkdir -p /tmp/upstream

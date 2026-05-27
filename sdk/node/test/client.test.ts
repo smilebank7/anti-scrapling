@@ -4,23 +4,23 @@ import { Client } from '../src/client.js';
 import type { Decision } from '../src/types.js';
 
 const ALLOW_DECISION: Decision = {
-  Verdict: 'ALLOW',
-  Score: 0,
-  Signals: [],
-  Reasons: [],
-  PolicyName: 'default',
-  Timestamp: 1_000_000_000_000,
-  RequestID: 'test-req-1',
+  verdict: 'ALLOW',
+  score: 0,
+  signals: [],
+  reasons: [],
+  policy_name: 'default',
+  timestamp: 1_000_000_000_000,
+  request_id: 'test-req-1',
 };
 
 const DENY_DECISION: Decision = {
-  Verdict: 'DENY',
-  Score: 100,
-  Signals: [{ Name: 'ja3_mismatch', Score: 50, Reason: 'JA3 mismatch', Detail: {} }],
-  Reasons: ['bot_fingerprint'],
-  PolicyName: 'strict',
-  Timestamp: 1_000_000_000_001,
-  RequestID: 'test-req-2',
+  verdict: 'DENY',
+  score: 100,
+  signals: [{ name: 'ja3_mismatch', score: 50, reason: 'JA3 mismatch', detail: {} }],
+  reasons: ['bot_fingerprint'],
+  policy_name: 'strict',
+  timestamp: 1_000_000_000_001,
+  request_id: 'test-req-2',
 };
 
 function startServer(
@@ -52,9 +52,9 @@ describe('Client.decide', () => {
     try {
       const client = new Client({ daemonUrl: url });
       const d = await client.decide({ method: 'GET', path: '/', host: 'example.com', remote_ip: '1.2.3.4', headers: {}, header_order: [] });
-      expect(d.Verdict).toBe('ALLOW');
-      expect(d.Score).toBe(0);
-      expect(d.RequestID).toBe('test-req-1');
+      expect(d.verdict).toBe('ALLOW');
+      expect(d.score).toBe(0);
+      expect(d.request_id).toBe('test-req-1');
     } finally {
       await stopServer(server);
     }
@@ -86,11 +86,11 @@ describe('Client.decide', () => {
     try {
       const client = new Client({ daemonUrl: url });
       const d = await client.decide({ method: 'GET', path: '/', host: 'example.com', remote_ip: '1.2.3.4', headers: {}, header_order: [] });
-      expect(d.Verdict).toBe('DENY');
-      expect(d.Score).toBe(100);
-      expect(d.Signals).toHaveLength(1);
-      expect(d.Signals[0]?.Name).toBe('ja3_mismatch');
-      expect(d.Reasons).toContain('bot_fingerprint');
+      expect(d.verdict).toBe('DENY');
+      expect(d.score).toBe(100);
+      expect(d.signals).toHaveLength(1);
+      expect(d.signals[0]?.name).toBe('ja3_mismatch');
+      expect(d.reasons).toContain('bot_fingerprint');
     } finally {
       await stopServer(server);
     }
@@ -99,15 +99,15 @@ describe('Client.decide', () => {
   it('failOpen=true returns ALLOW when daemon is unreachable', async () => {
     const client = new Client({ daemonUrl: 'http://127.0.0.1:1', failOpen: true });
     const d = await client.decide({ method: 'GET', path: '/', host: 'x', remote_ip: '1.2.3.4', headers: {}, header_order: [] });
-    expect(d.Verdict).toBe('ALLOW');
-    expect(d.Reasons).toContain('daemon_unavailable');
+    expect(d.verdict).toBe('ALLOW');
+    expect(d.reasons).toContain('daemon_unavailable');
   });
 
   it('failOpen=false returns DENY when daemon is unreachable', async () => {
     const client = new Client({ daemonUrl: 'http://127.0.0.1:1', failOpen: false });
     const d = await client.decide({ method: 'GET', path: '/', host: 'x', remote_ip: '1.2.3.4', headers: {}, header_order: [] });
-    expect(d.Verdict).toBe('DENY');
-    expect(d.Reasons).toContain('daemon_unavailable');
+    expect(d.verdict).toBe('DENY');
+    expect(d.reasons).toContain('daemon_unavailable');
   });
 
   it('aborts after timeoutMs and respects failOpen', async () => {
@@ -117,8 +117,8 @@ describe('Client.decide', () => {
       const start = Date.now();
       const d = await client.decide({ method: 'GET', path: '/', host: 'x', remote_ip: '1.2.3.4', headers: {}, header_order: [] });
       expect(Date.now() - start).toBeLessThan(1_000);
-      expect(d.Verdict).toBe('ALLOW');
-      expect(d.Reasons).toContain('daemon_unavailable');
+      expect(d.verdict).toBe('ALLOW');
+      expect(d.reasons).toContain('daemon_unavailable');
     } finally {
       server.closeAllConnections?.();
       await stopServer(server);
@@ -133,7 +133,7 @@ describe('Client.decide', () => {
     try {
       const client = new Client({ daemonUrl: url, failOpen: true });
       const d = await client.decide({ method: 'GET', path: '/', host: 'x', remote_ip: '1.2.3.4', headers: {}, header_order: [] });
-      expect(d.Verdict).toBe('ALLOW');
+      expect(d.verdict).toBe('ALLOW');
     } finally {
       await stopServer(server);
     }
@@ -147,7 +147,7 @@ describe('Client.decide', () => {
     try {
       const client = new Client({ daemonUrl: url, failOpen: false });
       const d = await client.decide({ method: 'GET', path: '/', host: 'x', remote_ip: '1.2.3.4', headers: {}, header_order: [] });
-      expect(d.Verdict).toBe('DENY');
+      expect(d.verdict).toBe('DENY');
     } finally {
       await stopServer(server);
     }
