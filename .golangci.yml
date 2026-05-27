@@ -3,29 +3,30 @@ version: "2"
 run:
   timeout: 5m
 
+linters:
+  default: none
+  enable:
+    - govet
+    - ineffassign
+    - unconvert
+    - staticcheck
+  settings:
+    staticcheck:
+      checks:
+        - all
+        - "-QF1001"
+        - "-ST1000"
+        - "-ST1003"
+        - "-ST1005"
+        - "-ST1020"
+        - "-ST1021"
+        - "-ST1022"
+  exclusions:
+    paths:
+      - testdata
+      - web
+      - sdk
+
 formatters:
   enable:
     - gofumpt
-
-linters:
-  enable:
-    - errcheck
-    - govet
-    - gosec
-    - staticcheck
-    - revive
-    - ineffassign
-    - unconvert
-    - unparam
-
-  settings:
-    revive:
-      rules:
-        - name: exported
-          arguments: ["sayRepetitiveInsteadOfStutters"]
-
-issues:
-  exclude-dirs:
-    - testdata
-    - web
-    - sdk

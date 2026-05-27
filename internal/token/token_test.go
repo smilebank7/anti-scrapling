@@ -291,7 +291,7 @@ func TestLoadKey_GeneratesWhenMissing(t *testing.T) {
 
 	info, err := os.Stat(path)
 	require.NoError(t, err)
-	assert.Equal(t, os.FileMode(0600), info.Mode().Perm())
+	assert.Equal(t, os.FileMode(0o600), info.Mode().Perm())
 }
 
 func TestLoadKey_Idempotent(t *testing.T) {
@@ -310,7 +310,7 @@ func TestLoadKey_Idempotent(t *testing.T) {
 func TestLoadKey_RejectsEmptyFile(t *testing.T) {
 	dir := t.TempDir()
 	path := filepath.Join(dir, "empty.key")
-	require.NoError(t, os.WriteFile(path, []byte{}, 0600))
+	require.NoError(t, os.WriteFile(path, []byte{}, 0o600))
 
 	_, err := token.LoadKey(path)
 	require.Error(t, err)

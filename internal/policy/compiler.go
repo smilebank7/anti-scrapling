@@ -8,11 +8,11 @@ import (
 	"strings"
 	"sync"
 
-	itypes "github.com/smilebank7/anti-scrapling/internal/types"
 	"github.com/google/cel-go/cel"
 	celtypes "github.com/google/cel-go/common/types"
 	"github.com/google/cel-go/common/types/ref"
 	"github.com/google/cel-go/common/types/traits"
+	itypes "github.com/smilebank7/anti-scrapling/internal/types"
 )
 
 var (
@@ -37,7 +37,8 @@ func buildEnv() (*cel.Env, error) {
 		cel.Variable("score", cel.IntType),
 		cel.Variable("has_valid_token", cel.BoolType),
 		cel.Variable("signals", cel.MapType(cel.StringType, cel.IntType)),
-		cel.Function("matches_family",
+		cel.Function(
+			"matches_family",
 			cel.MemberOverload(
 				"string_matches_family_list",
 				[]*cel.Type{cel.StringType, cel.ListType(cel.StringType)},

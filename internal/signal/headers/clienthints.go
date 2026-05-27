@@ -6,12 +6,14 @@ import (
 	"strings"
 )
 
-var chromeVersionRE = regexp.MustCompile(`Chrome/(\d+)`)
-var brandVersionRE = regexp.MustCompile(`"([^"]+)";v="(\d+)"`)
+var (
+	chromeVersionRE = regexp.MustCompile(`Chrome/(\d+)`)
+	brandVersionRE  = regexp.MustCompile(`"([^"]+)";v="(\d+)"`)
+)
 
 var chromeBrands = map[string]bool{
-	"Google Chrome": true,
-	"Chromium":      true,
+	"Google Chrome":  true,
+	"Chromium":       true,
 	"Microsoft Edge": true,
 }
 

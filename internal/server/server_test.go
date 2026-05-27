@@ -94,9 +94,7 @@ func waitForServerAddr(t *testing.T, srv *Server) string {
 		if addr != "127.0.0.1:0" {
 			return addr
 		}
-		select {
-		case <-time.After(10 * time.Millisecond):
-		}
+		<-time.After(10 * time.Millisecond)
 	}
 	t.Fatal("server did not start listening")
 	return ""

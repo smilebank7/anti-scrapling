@@ -4,9 +4,9 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/smilebank7/anti-scrapling/internal/types"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
+	"github.com/smilebank7/anti-scrapling/internal/types"
 )
 
 // Metrics is the set of Prometheus instrumentation for anti-scrapling.

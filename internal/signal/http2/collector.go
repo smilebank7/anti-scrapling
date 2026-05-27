@@ -2,7 +2,6 @@ package http2
 
 import (
 	"context"
-	"fmt"
 	"net/http"
 	"strings"
 
@@ -185,12 +184,4 @@ func cloneStringMap(in map[string]string) map[string]string {
 		out[key] = value
 	}
 	return out
-}
-
-func signalListString(signals []types.Signal) string {
-	names := make([]string, 0, len(signals))
-	for _, signal := range signals {
-		names = append(names, fmt.Sprintf("%s:%d", signal.Name, signal.Score))
-	}
-	return strings.Join(names, ",")
 }

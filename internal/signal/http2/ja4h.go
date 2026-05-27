@@ -73,7 +73,8 @@ func ComputeJA4HFromShape(shape JA4HShape) string {
 		headerCount = 99
 	}
 
-	sectionA := fmt.Sprintf("%s%s%s%s%02d%s",
+	sectionA := fmt.Sprintf(
+		"%s%s%s%s%02d%s",
 		methodCode(shape.Method),
 		versionCode(shape.ProtoMajor, shape.ProtoMinor),
 		cookieFlag,

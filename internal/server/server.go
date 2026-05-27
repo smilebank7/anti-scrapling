@@ -62,7 +62,7 @@ func (s *Server) Start() error {
 	s.listener = listener
 	s.mu.Unlock()
 
-	serveListener := net.Listener(listener)
+	serveListener := listener
 	if s.tlsCfg != nil {
 		tlsConfig, err := buildTLSConfig(s.tlsCfg)
 		if err != nil {

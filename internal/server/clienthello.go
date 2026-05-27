@@ -111,13 +111,6 @@ func (l *WrappedListener) Accept() (net.Conn, error) {
 	return NewWrappedConn(conn), nil
 }
 
-func storeClientHelloCapture(key string, capture *ClientHelloCapture) {
-	if key == "" || capture == nil {
-		return
-	}
-	clientHelloCaptures.Store(key, cloneCapture(capture))
-}
-
 func loadClientHelloCapture(key string) *ClientHelloCapture {
 	if key == "" {
 		return nil

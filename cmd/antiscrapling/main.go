@@ -51,7 +51,8 @@ func main() {
 	go func() { serveErrs <- adminSrv.Start() }()
 
 	d.health.SetReady(true)
-	d.logger.Info("anti-scrapling started",
+	d.logger.Info(
+		"anti-scrapling started",
 		"version", Version,
 		"bind", cfg.Bind,
 		"target", cfg.Target,

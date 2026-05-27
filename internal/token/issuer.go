@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/smilebank7/anti-scrapling/internal/types"
 	"github.com/golang-jwt/jwt/v5"
+	"github.com/smilebank7/anti-scrapling/internal/types"
 )
 
 type Issuer struct {

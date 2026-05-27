@@ -201,5 +201,3 @@ func leadingZeroBits(b []byte) int {
 	}
 	return total
 }
-
-

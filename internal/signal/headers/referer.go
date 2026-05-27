@@ -7,12 +7,12 @@ import (
 )
 
 type ipWindow struct {
-	mu          sync.Mutex
-	buf         []bool
-	pos         int
-	filled      bool
-	windowSize  int
-	threshold   float64
+	mu         sync.Mutex
+	buf        []bool
+	pos        int
+	filled     bool
+	windowSize int
+	threshold  float64
 }
 
 func newIPWindow(windowSize int, threshold float64) *ipWindow {

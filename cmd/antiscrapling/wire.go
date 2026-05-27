@@ -9,6 +9,7 @@ import (
 	"os"
 	"time"
 
+	"github.com/google/uuid"
 	"github.com/smilebank7/anti-scrapling/internal/api"
 	"github.com/smilebank7/anti-scrapling/internal/cache"
 	"github.com/smilebank7/anti-scrapling/internal/challenge"
@@ -23,7 +24,6 @@ import (
 	signaltls "github.com/smilebank7/anti-scrapling/internal/signal/tls"
 	"github.com/smilebank7/anti-scrapling/internal/token"
 	"github.com/smilebank7/anti-scrapling/internal/types"
-	"github.com/google/uuid"
 )
 
 type appConfig struct {
@@ -222,7 +222,8 @@ func buildMainHandler(d *deps) http.Handler {
 			origin := url.QueryEscape(r.URL.RequestURI())
 			http.Redirect(w, r, "/__as/challenge?origin="+origin, http.StatusFound)
 		default:
-			d.logger.Warn("request denied",
+			d.logger.Warn(
+				"request denied",
 				"request_id", reqID,
 				"ip", reqCtx.RemoteIP,
 				"score", dec.Score,

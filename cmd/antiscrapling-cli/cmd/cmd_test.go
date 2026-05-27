@@ -111,7 +111,7 @@ func repoRoot(t *testing.T) string {
 func writeTempFile(t *testing.T, name string, content []byte) string {
 	t.Helper()
 	f := filepath.Join(t.TempDir(), name)
-	if err := os.WriteFile(f, content, 0600); err != nil {
+	if err := os.WriteFile(f, content, 0o600); err != nil {
 		t.Fatal(err)
 	}
 	return f

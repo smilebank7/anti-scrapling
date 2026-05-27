@@ -3,8 +3,8 @@ package behavior
 import "github.com/smilebank7/anti-scrapling/internal/types"
 
 const (
-	jitterThreshold  = 0.05
-	minMoveCountBot  = 10
+	jitterThreshold = 0.05
+	minMoveCountBot = 10
 )
 
 func checkMouseJitter(b *types.BehaviorBeacon) *types.Signal {

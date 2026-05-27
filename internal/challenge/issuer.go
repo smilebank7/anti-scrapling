@@ -3,8 +3,8 @@ package challenge
 import (
 	"time"
 
-	lru "github.com/hashicorp/golang-lru/v2"
 	"github.com/google/uuid"
+	lru "github.com/hashicorp/golang-lru/v2"
 )
 
 const challengeTTL = 10 * time.Minute

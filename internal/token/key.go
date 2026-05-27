@@ -28,7 +28,7 @@ func LoadKey(path string) ([]byte, error) {
 		return nil, fmt.Errorf("token: generate key: %w", err)
 	}
 
-	if err := os.WriteFile(path, key, 0600); err != nil {
+	if err := os.WriteFile(path, key, 0o600); err != nil {
 		return nil, fmt.Errorf("token: write key file: %w", err)
 	}
 

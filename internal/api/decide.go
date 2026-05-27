@@ -7,10 +7,10 @@ import (
 	"net/url"
 	"time"
 
+	"github.com/google/uuid"
 	"github.com/smilebank7/anti-scrapling/internal/pipeline"
 	"github.com/smilebank7/anti-scrapling/internal/token"
 	"github.com/smilebank7/anti-scrapling/internal/types"
-	"github.com/google/uuid"
 )
 
 // DecideHandler is the POST /v1/decide handler for SDK adapters.
