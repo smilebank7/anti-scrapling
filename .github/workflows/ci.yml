@@ -33,6 +33,7 @@ jobs:
       - uses: golangci/golangci-lint-action@v7
         with:
           version: latest
+          verify: false
 
   js-bundle:
     runs-on: ubuntu-latest
