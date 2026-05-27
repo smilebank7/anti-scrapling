@@ -1,0 +1,106 @@
+version: 1
+
+listener:
+  bind: ":8080"
+  target: "http://upstream:3000"
+
+token:
+  secret_file: /etc/anti-scrapling/token.key
+  ttl: 8h
+  bind_to: [ip, ua, ja3, ja4]
+
+policy:
+  default: deny
+  rules:
+    - name: allow-healthcheck
+      match: { path: "/healthz" }
+      action: allow
+
+    - name: allow-readyz
+      match: { path: "/readyz" }
+      action: allow
+
+    - name: allow-challenge-assets
+      match: { path_prefix: "/__as/" }
+      action: allow
+
+    - name: allow-valid-token
+      match: { has_valid_token: true }
+      action: allow
+
+    - name: deny-datacenter-ip
+      match:
+        expr: "ip.category == 'datacenter' || ip.category == 'tor'"
+      action: deny
+
+    - name: deny-any-high-weight-signal
+      match:
+        expr: "signals['ja3_known_scraper'] > 0 || signals['runtime_error_stack_pw_signature'] > 0 || signals['runtime_console_debug_disabled'] > 0 || signals['canvas_seeded_noise'] > 0 || signals['nav_webdriver_set'] > 0"
+      action: deny
+
+    - name: challenge-everyone-else
+      match: { expr: "score >= 10" }
+      action: challenge
+
+    - name: allow-residential-clean
+      match:
+        expr: "ip.category == 'residential' && score < 10"
+      action: allow
+
+scoring:
+  challenge_threshold: 10
+  deny_threshold: 50
+  weights:
+    ja3_mismatch: 40
+    ja3_known_scraper: 100
+    ja4_unknown: 30
+    h2_akamai_mismatch: 35
+    ja4h_unknown: 20
+    header_order_anomaly: 20
+    ua_ch_mismatch: 25
+    secfetch_invalid: 15
+    browserforge_quirk: 40
+    no_referer: 5
+    google_referer_anomaly: 10
+    datacenter_ip: 30
+    tor_exit: 50
+    mobile_ip: -5
+    residential_ip: 0
+    nav_platform_ua_mismatch: 50
+    nav_hardware_concurrency_trap: 30
+    nav_webdriver_set: 60
+    nav_plugins_anomaly: 20
+    nav_vendor_ua_mismatch: 25
+    nav_oscpu_firefox_only: 15
+    webgl_vendor_renderer_impossible: 40
+    webgl_unmasked_missing: 20
+    webgl_extensions_anomaly: 15
+    canvas_seeded_noise: 50
+    audio_seeded_noise: 40
+    codec_rare_missing: 20
+    font_os_bundled_missing: 25
+    window_outer_height_85_trap: 50
+    chrome_runtime_connect_failure: 40
+    chrome_present_for_firefox: 60
+    permissions_midi_inconsistent: 35
+    webrtc_no_local_ips: 15
+    dom_iframe_contentwindow_anomaly: 40
+    dom_closed_shadow_root_accessible: 50
+    runtime_console_debug_disabled: 60
+    runtime_to_string_proxy: 35
+    runtime_error_stack_pw_signature: 70
+    speech_voices_empty: 15
+    sw_register_noop: 45
+    hairline_non_modernizr_anomaly: 20
+    behavior_resource_block: 40
+    behavior_smooth_path: 30
+    behavior_turnstile_clicker: 60
+    behavior_hidden_dominant: 20
+
+challenge:
+  pow_difficulty: 6
+  collect_fingerprint: true
+
+cache:
+  backend: memory
+  ttl_seconds: 30
