@@ -1,0 +1,73 @@
+# Caddyfile.sidecar
+#
+# Sidecar pattern: Caddy stays in charge of routing and TLS.
+# anti-scrapling acts as a forward_auth gate that Caddy consults
+# before passing each request to the real backend.
+#
+# Traffic flow:
+#   client -> Caddy:443 -> forward_auth -> anti-scrapling:8080/v1/decide
+#                       -> (200) -> backend:3000
+#                       -> (401/403) -> anti-scrapling challenge page
+#
+# NOTE: The /v1/decide endpoint is planned for anti-scrapling v1.1.
+# This config is ready to use once that endpoint ships.
+#
+# Trade-offs vs standalone:
+#   + Caddy keeps full control: you can add rate-limiting, caching,
+#     or other middleware alongside anti-scrapling.
+#   + Easy to bolt onto an existing Caddy deployment.
+#   + Per-route granularity: protect /api/* differently from /static/*.
+#   - Two hops per request adds a small latency cost (~1ms on loopback).
+#   - forward_auth copies only response headers on success, not the body.
+#     Challenge pages are served by the copy_response directive below.
+#
+# Prerequisites:
+#   - Caddy 2.6+ (forward_auth is stable from 2.6)
+#   - anti-scrapling v1.1+ (for /v1/decide)
+#   - Backend on localhost:3000
+
+example.com {
+    encode gzip zstd
+    trusted_proxies private_ranges
+
+    # Protect everything under / with anti-scrapling.
+    # Static assets that don't need bot protection can get their own
+    # route block above this one (Caddy matches routes top-to-bottom).
+    route {
+        # forward_auth sends a sub-request to AS with the original
+        # request headers. On 200, Caddy continues to the backend.
+        # On any other status, Caddy returns AS's response directly
+        # (including the challenge page body).
+        forward_auth localhost:8080 {
+            uri /v1/decide
+
+            # Headers AS sets on a 200 response that Caddy should copy
+            # into the upstream request. Useful for passing a verified
+            # visitor token to the backend.
+            copy_headers X-AS-Visitor-ID X-AS-Risk-Score
+
+            # If AS returns 401 or 403, Caddy serves AS's response body
+            # (the challenge page) directly to the client.
+        }
+
+        # Reached only when AS returned 200.
+        reverse_proxy localhost:3000 {
+            header_up Host              {upstream_hostport}
+            header_up X-Real-IP         {remote_host}
+            header_up X-Forwarded-Proto {scheme}
+        }
+    }
+
+    # Static assets: skip the AS check entirely to save latency.
+    # Adjust the path matcher to match your asset layout.
+    handle /static/* {
+        root * /var/www/static
+        file_server
+    }
+}
+
+# Optional: expose the anti-scrapling admin API on a private port.
+# Bind to 127.0.0.1 or a VPN interface in production.
+:9091 {
+    reverse_proxy localhost:9091
+}

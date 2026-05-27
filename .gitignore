@@ -26,3 +26,4 @@ coverage.html
 
 # Test outputs
 tests/scrapling/results/
+sdk/python/anti_scrapling.egg-info/

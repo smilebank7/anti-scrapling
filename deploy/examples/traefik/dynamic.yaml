@@ -1,0 +1,112 @@
+# traefik/dynamic.yaml
+#
+# Traefik file provider: dynamic routing configuration.
+# This file is hot-reloaded by Traefik without a restart.
+#
+# Use this when you prefer file-based config over Docker labels,
+# or when anti-scrapling runs outside Docker (e.g. on the host or
+# in a VM) and Traefik can't discover it via the Docker provider.
+#
+# To activate: add a file provider block to your traefik.yaml:
+#
+#   providers:
+#     file:
+#       filename: /etc/traefik/dynamic.yaml
+#       watch: true
+
+http:
+  routers:
+    # Public router: all traffic for example.com goes to anti-scrapling.
+    antiscrapling:
+      rule: "Host(`example.com`)"
+      entryPoints:
+        - websecure
+      tls:
+        certResolver: letsencrypt
+      service: antiscrapling
+      # Optional: attach middlewares here (e.g. rate-limit, IP allowlist).
+      # middlewares:
+      #   - ratelimit
+
+    # Redirect HTTP to HTTPS.
+    antiscrapling-http:
+      rule: "Host(`example.com`)"
+      entryPoints:
+        - web
+      middlewares:
+        - redirect-to-https
+      service: antiscrapling
+
+    # Admin router: restrict the anti-scrapling admin API to trusted IPs.
+    # Bind the admin entrypoint to a private interface in traefik.yaml.
+    antiscrapling-admin:
+      rule: "Host(`example.com`) && PathPrefix(`/__as_admin`)"
+      entryPoints:
+        - admin
+      middlewares:
+        - admin-allowlist
+      service: antiscrapling-admin
+
+  services:
+    # Main anti-scrapling service (proxy port).
+    antiscrapling:
+      loadBalancer:
+        servers:
+          - url: "http://127.0.0.1:8080"
+        # Passive health check: remove the server from rotation if it
+        # returns 5xx responses. Traefik re-adds it after recovery.
+        healthCheck:
+          path: /healthz
+          interval: 10s
+          timeout: 3s
+
+    # Admin API service (separate port).
+    antiscrapling-admin:
+      loadBalancer:
+        servers:
+          - url: "http://127.0.0.1:9091"
+
+    # Metrics service. Expose this to your internal Prometheus scraper,
+    # not to the public internet.
+    antiscrapling-metrics:
+      loadBalancer:
+        servers:
+          - url: "http://127.0.0.1:9090"
+
+  middlewares:
+    # Permanent redirect from HTTP to HTTPS.
+    redirect-to-https:
+      redirectScheme:
+        scheme: https
+        permanent: true
+
+    # Restrict admin access to trusted CIDR ranges.
+    # Adjust to match your ops network.
+    admin-allowlist:
+      ipAllowList:
+        sourceRange:
+          - "127.0.0.1/32"
+          - "10.0.0.0/8"
+          - "172.16.0.0/12"
+          - "192.168.0.0/16"
+
+    # Example rate-limit middleware. Uncomment and attach to the
+    # antiscrapling router if you want Traefik-level rate limiting
+    # in addition to anti-scrapling's own controls.
+    # ratelimit:
+    #   rateLimit:
+    #     average: 100
+    #     burst: 50
+
+tls:
+  options:
+    # Enforce modern TLS. Clients on TLS 1.0/1.1 will be rejected.
+    default:
+      minVersion: VersionTLS12
+      cipherSuites:
+        - TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+        - TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+        - TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+        - TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+        - TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256
+        - TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256

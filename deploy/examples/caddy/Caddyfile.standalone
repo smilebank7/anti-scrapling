@@ -1,0 +1,64 @@
+# Caddyfile.standalone
+#
+# Standalone pattern: Caddy handles TLS (automatic via ACME) and
+# forwards everything to anti-scrapling. AS is the effective front door.
+#
+# Traffic flow:
+#   client -> Caddy:443 (TLS, auto-cert) -> anti-scrapling:8080 -> upstream
+#
+# Trade-offs vs sidecar:
+#   + Fewest moving parts. Caddy + AS is a two-process stack.
+#   + Caddy's automatic HTTPS means zero cert management.
+#   + anti-scrapling owns the full response lifecycle (challenges, blocks).
+#   - Caddy can't apply its own request matchers or rate-limits before AS.
+#   - Swapping AS out means touching this file.
+#
+# Prerequisites:
+#   - Caddy 2.x
+#   - anti-scrapling daemon on localhost:8080
+#   - DNS for example.com pointing at this host (for ACME)
+
+example.com {
+    # Caddy negotiates and renews TLS automatically via Let's Encrypt.
+    # No ssl_certificate lines needed.
+
+    # Compress responses before sending to the client. Caddy compresses
+    # here rather than inside AS so the challenge JS is also compressed.
+    encode gzip zstd
+
+    # Forward the real client IP. Caddy sets X-Forwarded-For by default;
+    # this block tells Caddy which upstream addresses to trust so it
+    # doesn't blindly trust a spoofed header from the internet.
+    trusted_proxies private_ranges
+
+    # All traffic goes to anti-scrapling. AS then proxies to the real
+    # upstream based on its own routing config.
+    reverse_proxy localhost:8080 {
+        # Keep connections alive to avoid per-request TCP overhead.
+        transport http {
+            keepalive          30s
+            keepalive_idle_conns 20
+        }
+
+        # Pass the original Host header so AS can apply per-domain policies.
+        header_up Host {upstream_hostport}
+
+        # Caddy sets X-Forwarded-For automatically. Also pass X-Real-IP
+        # for AS's IP reputation module.
+        header_up X-Real-IP {remote_host}
+
+        # Tell AS the connection arrived over HTTPS.
+        header_up X-Forwarded-Proto {scheme}
+
+        # Surface upstream health. If AS is down, Caddy returns 502
+        # rather than hanging indefinitely.
+        health_uri  /healthz
+        health_interval 10s
+    }
+}
+
+# Optional: expose Prometheus metrics on a separate internal port.
+# Bind this to a private interface in production.
+:9090 {
+    reverse_proxy localhost:9090
+}

@@ -1,0 +1,20 @@
+services:
+  daemon:
+    build:
+      context: ../..
+      dockerfile: deploy/docker/Dockerfile
+    ports:
+      - "8080:8080"
+      - "9090:9090"
+      - "9091:9091"
+    environment:
+      AS_TARGET: http://upstream:3000
+      AS_TOKEN_SECRET_FILE: /etc/anti-scrapling/token.key
+    volumes:
+      - ./token.key:/etc/anti-scrapling/token.key:ro
+    depends_on: [upstream]
+  upstream:
+    image: ealen/echo-server:latest
+    expose: ["3000"]
+    environment:
+      PORT: "3000"

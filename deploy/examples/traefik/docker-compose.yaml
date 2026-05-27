@@ -1,0 +1,97 @@
+# traefik/docker-compose.yaml
+#
+# Standalone pattern: Traefik routes external traffic to anti-scrapling,
+# which then forwards clean requests to the upstream service.
+#
+# Traffic flow:
+#   internet -> Traefik:443 (TLS, ACME) -> anti-scrapling:8080 -> upstream:3000
+#
+# Services:
+#   traefik       - edge router, TLS termination, ACME cert management
+#   antiscrapling - bot detection and challenge layer
+#   upstream      - your actual application (replace with your image)
+#
+# Usage:
+#   docker compose up -d
+#
+# Traefik dashboard (dev only, disable in prod):
+#   http://localhost:8081
+
+version: "3.9"
+
+networks:
+  # All services share one internal network. Traefik is the only
+  # container with a published port on the host.
+  edge:
+    driver: bridge
+
+services:
+  traefik:
+    image: traefik:v3.0
+    restart: unless-stopped
+    networks:
+      - edge
+    ports:
+      - "80:80"
+      - "443:443"
+      # Dashboard port. Remove or restrict in production.
+      - "127.0.0.1:8081:8080"
+    volumes:
+      # Traefik reads its static config from traefik.yaml (or CLI flags).
+      # Dynamic config (routers, services) comes from dynamic.yaml via
+      # the file provider defined below.
+      - ./traefik.yaml:/etc/traefik/traefik.yaml:ro
+      - ./dynamic.yaml:/etc/traefik/dynamic.yaml:ro
+      # ACME cert storage. Use a named volume in production so certs
+      # survive container restarts.
+      - traefik-certs:/letsencrypt
+      # Docker socket lets Traefik discover containers automatically.
+      # In production, consider using a socket proxy (e.g. tecnativa/docker-socket-proxy).
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    labels:
+      - "traefik.enable=true"
+
+  antiscrapling:
+    # Replace with the actual anti-scrapling image once published.
+    image: ghcr.io/your-org/anti-scrapling:latest
+    restart: unless-stopped
+    networks:
+      - edge
+    environment:
+      # Tell AS where to forward clean traffic.
+      AS_UPSTREAM: "http://upstream:3000"
+      # Policy file to load on startup.
+      AS_POLICY: "/etc/antiscrapling/policy.yaml"
+    volumes:
+      - ../../policies/default.yaml:/etc/antiscrapling/policy.yaml:ro
+    expose:
+      # Main proxy port (internal only, Traefik routes to it).
+      - "8080"
+      # Metrics port (scrape from your Prometheus instance).
+      - "9090"
+      # Admin API (keep off the public internet).
+      - "9091"
+    labels:
+      - "traefik.enable=true"
+      # Router: match all traffic for example.com and send to AS.
+      - "traefik.http.routers.antiscrapling.rule=Host(`example.com`)"
+      - "traefik.http.routers.antiscrapling.entrypoints=websecure"
+      - "traefik.http.routers.antiscrapling.tls.certresolver=letsencrypt"
+      # Service: tell Traefik which port AS listens on.
+      - "traefik.http.services.antiscrapling.loadbalancer.server.port=8080"
+
+  upstream:
+    # Replace with your actual application image.
+    image: nginx:alpine
+    restart: unless-stopped
+    networks:
+      - edge
+    expose:
+      - "3000"
+    # Upstream is NOT exposed to Traefik directly. Only anti-scrapling
+    # can reach it. This enforces that all traffic passes through AS.
+    labels:
+      - "traefik.enable=false"
+
+volumes:
+  traefik-certs:

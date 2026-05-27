@@ -1,0 +1,37 @@
+{
+  "name": "@anti-scrapling/node",
+  "version": "0.1.0",
+  "description": "Node.js SDK for anti-scrapling firewall - Express + NestJS adapters",
+  "license": "Apache-2.0",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js",
+    "./express": "./dist/express.js",
+    "./nestjs": "./dist/nestjs.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run"
+  },
+  "peerDependencies": {
+    "express": "^4.18.0 || ^5.0.0",
+    "@nestjs/common": "^10.0.0 || ^11.0.0",
+    "@nestjs/core": "^10.0.0 || ^11.0.0"
+  },
+  "peerDependenciesMeta": {
+    "express": { "optional": true },
+    "@nestjs/common": { "optional": true },
+    "@nestjs/core": { "optional": true }
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0",
+    "vitest": "^2.1.0",
+    "express": "^5.0.0",
+    "supertest": "^7.0.0",
+    "@types/express": "^5.0.0",
+    "@types/supertest": "^6.0.0",
+    "@types/node": "^22.0.0"
+  }
+}
