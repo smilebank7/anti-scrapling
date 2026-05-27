@@ -1,0 +1,31 @@
+version: "2"
+
+run:
+  timeout: 5m
+
+formatters:
+  enable:
+    - gofumpt
+
+linters:
+  enable:
+    - errcheck
+    - govet
+    - gosec
+    - staticcheck
+    - revive
+    - ineffassign
+    - unconvert
+    - unparam
+
+  settings:
+    revive:
+      rules:
+        - name: exported
+          arguments: ["sayRepetitiveInsteadOfStutters"]
+
+issues:
+  exclude-dirs:
+    - testdata
+    - web
+    - sdk
