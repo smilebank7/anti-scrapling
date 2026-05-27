@@ -1,0 +1,39 @@
+{
+  "profile": "curl_cffi_chrome131_get",
+  "header_order": [
+    "Host",
+    "Connection",
+    "sec-ch-ua",
+    "sec-ch-ua-mobile",
+    "sec-ch-ua-platform",
+    "Upgrade-Insecure-Requests",
+    "User-Agent",
+    "Accept",
+    "Sec-Fetch-Site",
+    "Sec-Fetch-Mode",
+    "Sec-Fetch-User",
+    "Sec-Fetch-Dest",
+    "Referer",
+    "Accept-Encoding",
+    "Accept-Language"
+  ],
+  "ua_ch_consistency": true,
+  "sec_ch_ua_present": true,
+  "sec_fetch_present": true,
+  "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
+  "sec_ch_ua_platform": "Linux",
+  "sec_ch_ua_mobile": false,
+  "accept_encoding": "gzip, deflate, br",
+  "browser_family": "chrome",
+  "version_hint": 131,
+  "is_scraper_library": true,
+  "scraper_library": "curl_cffi + browserforge",
+  "impersonates": "chrome131",
+  "anomalies": [
+    "Referer: https://www.google.com/ present on all requests (Scrapling hardcodes Google referer)",
+    "No zstd in Accept-Encoding (Chrome 130+ includes zstd; curl_cffi may lag)",
+    "Sec-Fetch-Site: none but Referer present (contradiction: Sec-Fetch-Site should reflect referer)",
+    "sec-ch-ua value uses browserforge-generated string which may have subtle version quirks"
+  ],
+  "notes": "curl_cffi impersonate=chrome131 with Scrapling's browserforge header generator. CRITICAL ANOMALY: Referer is always google.com (Scrapling hardcodes it in Fetcher.headers). Missing zstd encoding. Sec-Fetch-Site:none contradicts the Referer header. These inconsistencies are reliable detection signals (L2.2, L2.4 in threat model)."
+}

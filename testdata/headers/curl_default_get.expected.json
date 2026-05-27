@@ -1,0 +1,26 @@
+{
+  "profile": "curl_default_get",
+  "header_order": [
+    "Host",
+    "User-Agent",
+    "Accept"
+  ],
+  "ua_ch_consistency": false,
+  "sec_ch_ua_present": false,
+  "sec_fetch_present": false,
+  "user_agent": "curl/8.6.0",
+  "sec_ch_ua_platform": null,
+  "sec_ch_ua_mobile": null,
+  "accept_encoding": null,
+  "browser_family": "curl",
+  "version_hint": 8,
+  "is_scraper_library": true,
+  "scraper_library": "curl",
+  "anomalies": [
+    "User-Agent reveals curl/version",
+    "Only 3 headers (browsers send 13+)",
+    "No Accept-Encoding header at all",
+    "Accept: */* not browser-like"
+  ],
+  "notes": "Raw curl 8.6.0 CLI with default settings. Most detectable profile: only 3 headers, no Accept-Encoding, curl User-Agent. Trivially blocked at header level without any fingerprinting."
+}

@@ -1,0 +1,19 @@
+{
+  "profile": "safari18_mac",
+  "ja3": "771,4865-4866-4867-49196-49200-49195-49199-52393-52392-49161-49162-49171-49172-156-157-47-53-255,0-23-65281-10-11-16-5-13-18-51-45-43-21-41,29-23-24,0",
+  "ja3_hash": "9c4409ff1b0096116f2dcc9e696e1588",
+  "ja4": "t13d1714h2_ca21dff6868a_7d784a25af34",
+  "browser_family": "safari",
+  "version_hint": 18,
+  "is_scraper_library": false,
+  "alpn": [
+    "h2",
+    "http/1.1"
+  ],
+  "os": "macos",
+  "session_id_len": 32,
+  "notes": "Safari 18 macOS. Notable: includes TLS_EMPTY_RENEGOTIATION_INFO_SCSV (0xFF) in cipher list; includes pre_shared_key (41) extension; no compress_certificate, no application_settings (ALPS). Reconstructed from tls.peet.ws Safari 18 captures.",
+  "sources": [
+    "https://tls.peet.ws/"
+  ]
+}

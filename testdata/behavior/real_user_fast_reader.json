@@ -1,0 +1,45 @@
+{
+  "session_id": "sess_b2c3d4e5f6a7",
+  "page_url": "https://example.com/blog/deep-dive-2024",
+  "page_visible": true,
+  "visit_duration_ms": 127430,
+  "scroll": {
+    "events": 234,
+    "max_depth_px": 8920,
+    "max_depth_pct": 97,
+    "velocity_px_per_sec_mean": 187.3,
+    "velocity_px_per_sec_max": 1240.0,
+    "direction_changes": 31
+  },
+  "mouse": {
+    "move_events": 67,
+    "click_events": 1,
+    "jitter_mean_px": 3.2,
+    "jitter_max_px": 18.4,
+    "path_straightness": 0.74,
+    "idle_periods_count": 18,
+    "longest_idle_ms": 23400
+  },
+  "clicks": [
+    {"x": 512, "y": 234, "timestamp_ms": 87234, "target_tag": "A", "delay_since_prev_ms": 87234}
+  ],
+  "key_events": 0,
+  "resource_requests": {
+    "css": 3,
+    "fonts": 2,
+    "images": 12,
+    "scripts": 5,
+    "beacons": 1
+  },
+  "attention": {
+    "focus_events": 1,
+    "blur_events": 0,
+    "visibility_changes": 0,
+    "hidden_duration_ms": 0
+  },
+  "timing_anomalies": {
+    "constant_interval_clicks": false,
+    "suspiciously_fast_scroll": false,
+    "zero_jitter_mouse": false
+  }
+}

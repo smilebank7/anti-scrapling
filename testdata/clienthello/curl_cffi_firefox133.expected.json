@@ -1,0 +1,21 @@
+{
+  "profile": "curl_cffi_firefox133",
+  "ja3": "771,4865-4867-4866-49195-49199-52393-52392-49196-49200-49161-49162-49171-49172-156-157-47-53,0-23-65281-10-11-35-16-5-34-51-43-13-45-28,29-23-24-25-256-257,0",
+  "ja3_hash": "1ad946d825cc9b4e935a7ade8fbb03b3",
+  "ja4": "t13d1714h2_ca21dff6868a_34e8737d688b",
+  "browser_family": "firefox",
+  "version_hint": 133,
+  "is_scraper_library": true,
+  "alpn": [
+    "h2",
+    "http/1.1"
+  ],
+  "os": "n/a",
+  "scraper_library": "curl_cffi",
+  "impersonates": "firefox133",
+  "session_id_len": 0,
+  "notes": "curl_cffi impersonate=firefox133. Matches Firefox 133 TLS profile closely. Firefox 133 vs 134 difference: missing ECH outer extension (65037) in 133. Detection: H2 SETTINGS fingerprint diverges from real Firefox.",
+  "sources": [
+    "https://github.com/lexiforest/curl_cffi"
+  ]
+}

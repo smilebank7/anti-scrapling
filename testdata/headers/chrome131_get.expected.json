@@ -1,0 +1,30 @@
+{
+  "profile": "chrome131_get",
+  "header_order": [
+    "Host",
+    "Connection",
+    "sec-ch-ua",
+    "sec-ch-ua-mobile",
+    "sec-ch-ua-platform",
+    "Upgrade-Insecure-Requests",
+    "User-Agent",
+    "Accept",
+    "Sec-Fetch-Site",
+    "Sec-Fetch-Mode",
+    "Sec-Fetch-User",
+    "Sec-Fetch-Dest",
+    "Accept-Encoding",
+    "Accept-Language"
+  ],
+  "ua_ch_consistency": true,
+  "sec_ch_ua_present": true,
+  "sec_fetch_present": true,
+  "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
+  "sec_ch_ua_platform": "Linux",
+  "sec_ch_ua_mobile": false,
+  "accept_encoding": "gzip, deflate, br, zstd",
+  "browser_family": "chrome",
+  "version_hint": 131,
+  "is_scraper_library": false,
+  "notes": "Chrome 131 Linux. sec-ch-ua lowercase headers appear before User-Agent (Chrome places Client Hints before UA in HTTP/2, different ordering in HTTP/1.1). Connection: keep-alive present. No Referer (direct navigation). Accept includes signed-exchange. zstd in Accept-Encoding (Chrome 130+)."
+}

@@ -1,0 +1,11 @@
+TODO: Replace with real Wireshark capture of Chrome 131 HTTP/2 connection preface.
+Real capture procedure (W1-T2 task):
+  1. Start mitm proxy: mitmproxy --mode transparent --ssl-insecure
+  2. curl --proxy http://localhost:8080 https://example.com/ --http2
+  3. Export HTTP/2 frames from Wireshark: File > Export PDUs > H2
+  4. Strip TLS layer, keep raw H2 frames starting at connection preface
+     (PRI * HTTP/2.0\r\n\r\nSM\r\n\r\n)
+  5. Save SETTINGS + WINDOW_UPDATE + HEADERS frames as binary
+
+Expected Akamai H2 fingerprint: 1:65536,3:1000,4:6291456,6:262144|15663105|0|m,a,s,p
+(Chrome 131 Linux documented value from Akamai passive fingerprinting research)

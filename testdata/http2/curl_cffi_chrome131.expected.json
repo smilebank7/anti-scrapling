@@ -1,0 +1,25 @@
+{
+  "profile": "curl_cffi_chrome131",
+  "akamai_h2_fingerprint": "1:65536,3:1000,4:6291456,6:262144|15663105|0|m,a,s,p",
+  "ja4h": "ge11cn060000_7c8a3eaa8540_2c6e4f16ff14",
+  "settings": {
+    "HEADER_TABLE_SIZE": 65536,
+    "MAX_CONCURRENT_STREAMS": 1000,
+    "INITIAL_WINDOW_SIZE": 6291456,
+    "MAX_HEADER_LIST_SIZE": 262144
+  },
+  "window_update_increment": 15663105,
+  "pseudo_header_order": ["method", "authority", "scheme", "path"],
+  "priority_frames": [],
+  "browser_family": "chrome",
+  "version_hint": 131,
+  "is_scraper_library": true,
+  "scraper_library": "curl_cffi",
+  "impersonates": "chrome131",
+  "detection_notes": "H2 fingerprint matches Chrome 131 SETTINGS values. Detection relies on combination of: (1) missing sec-ch-ua-form-factor header present in real Chrome; (2) absence of cookie jar consistency across redirects; (3) behavioral signals. SETTINGS-level impersonation is good. Real binary capture needed to verify PRIORITY frame presence/absence.",
+  "notes": "curl_cffi impersonate=chrome131 H2 SETTINGS. Akamai fingerprint value is documented as matching Chrome 131 when impersonation is working correctly. The real differentiator between curl_cffi and Chrome at H2 level requires byte-level analysis of PRIORITY frames and HEADERS pseudo-header ordering.",
+  "sources": [
+    "https://github.com/lexiforest/curl_cffi",
+    "https://github.com/lwthiker/curl-impersonate"
+  ]
+}

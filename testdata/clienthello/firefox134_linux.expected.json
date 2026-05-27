@@ -1,0 +1,20 @@
+{
+  "profile": "firefox134_linux",
+  "ja3": "771,4865-4867-4866-49195-49199-52393-52392-49196-49200-49161-49162-49171-49172-156-157-47-53,0-23-65281-10-11-35-16-5-34-51-43-13-45-28-65037,29-23-24-25-256-257,0",
+  "ja3_hash": "0b935e9b934ada81b2e407784c3ef1b0",
+  "ja4": "t13d1715h2_ca21dff6868a_01a254a6f450",
+  "browser_family": "firefox",
+  "version_hint": 134,
+  "is_scraper_library": false,
+  "alpn": [
+    "h2",
+    "http/1.1"
+  ],
+  "os": "linux",
+  "session_id_len": 0,
+  "notes": "Firefox 134 Linux. Notable: no GREASE; session ID empty; includes delegated_credentials (34), record_size_limit (28), ECH outer (65037). Different cipher order from Chrome (CHACHA before AES-256). navigator.vendor is empty string in Firefox.",
+  "sources": [
+    "https://tls.peet.ws/",
+    "https://github.com/nicowillis/tls-fingerprints"
+  ]
+}

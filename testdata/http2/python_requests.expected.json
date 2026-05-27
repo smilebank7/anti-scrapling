@@ -1,0 +1,16 @@
+{
+  "profile": "python_requests",
+  "akamai_h2_fingerprint": null,
+  "ja4h": null,
+  "settings": null,
+  "window_update_increment": null,
+  "pseudo_header_order": null,
+  "priority_frames": null,
+  "browser_family": "python-requests",
+  "version_hint": null,
+  "is_scraper_library": true,
+  "scraper_library": "python-requests",
+  "no_h2": true,
+  "notes": "python-requests with urllib3 does NOT support HTTP/2. All connections are HTTP/1.1. Detection happens at TLS JA3 (known python-requests hash) and HTTP header level (no sec-fetch-*, no sec-ch-ua). If httpx or requests[http2] is used, a different profile would apply.",
+  "sources": ["https://github.com/psf/requests"]
+}

@@ -1,0 +1,21 @@
+{
+  "profile": "chrome131_linux",
+  "ja3": "771,4865-4866-4867-49195-49199-49196-49200-52393-52392-49171-49172-156-157-47-53,0-23-65281-10-11-35-16-5-13-18-51-45-43-27-17513-21,29-23-24,0",
+  "ja3_hash": "cd08e31494f9531f560d64c695473da9",
+  "ja4": "t13d1516h2_dea800f94266_90347b42e38e",
+  "browser_family": "chrome",
+  "version_hint": 131,
+  "is_scraper_library": false,
+  "alpn": [
+    "h2",
+    "http/1.1"
+  ],
+  "os": "linux",
+  "session_id_len": 32,
+  "notes": "Representative reconstruction from tls.peet.ws Chrome 131 Linux capture and FoxIO JA4 test vectors. Cipher/extension order matches real Chrome 131. GREASE 0x0A0A used as placeholder; real Chrome randomises GREASE per connection.",
+  "sources": [
+    "https://tls.peet.ws/",
+    "https://github.com/FoxIO-LLC/ja4/blob/main/technical_details/JA4.md",
+    "https://github.com/salesforce/ja3"
+  ]
+}

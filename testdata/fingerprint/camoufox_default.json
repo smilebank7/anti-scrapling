@@ -1,0 +1,151 @@
+{
+  "version": 1,
+  "_detection_signals": {
+    "canvas_noise": "SIGNAL: camoufox applies per-session canvas seed noise. Same canvas rendered 3 times produces 3 different hashes. variance=3.",
+    "audio_noise": "SIGNAL: camoufox applies per-session audio fingerprint seed. AudioContext output varies each render. variance=3.",
+    "webgl_impossible_combo": "SIGNAL: camoufox samples unmasked_vendor and unmasked_renderer from separate DB entries. 'Intel Inc.' vendor with 'Apple GPU' renderer is an impossible hardware combination.",
+    "webrtc_spoof": "SIGNAL: camoufox patches WebRTC with setWebRTCIPv4(). local_ips may mismatch actual socket IP seen by server.",
+    "speech_spoof": "SIGNAL: camoufox patches speechSynthesis.getVoices() with setSpeechVoices(). Voice list may be inconsistent with OS.",
+    "font_spoof": "SIGNAL: camoufox patches font detection with setFontList(). Missing OS-bundled fonts that camoufox doesn't include in its spoof list.",
+    "ublock_bundled": "SIGNAL: camoufox bundles uBlock Origin. Fingerprint/tracker beacon requests will be blocked. Our beacon endpoint will receive no fetch from camoufox sessions."
+  },
+  "navigator": {
+    "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:131.0) Gecko/20100101 Firefox/131.0",
+    "platform": "MacIntel",
+    "vendor": "",
+    "languages": ["en-US", "en"],
+    "language": "en-US",
+    "hardware_concurrency": 8,
+    "device_memory": 8,
+    "webdriver": false,
+    "plugins": [],
+    "mime_types": [],
+    "oscpu": "Intel Mac OS X 10.15",
+    "product": "Gecko",
+    "product_sub": "20100101"
+  },
+  "webgl": {
+    "vendor": "Mozilla",
+    "renderer": "Mozilla",
+    "unmasked_vendor": "Intel Inc.",
+    "unmasked_renderer": "Apple GPU",
+    "version": "WebGL 1.0",
+    "shading_language_ver": "WebGL GLSL ES 1.0",
+    "extensions": [
+      "ANGLE_instanced_arrays", "EXT_blend_minmax", "EXT_color_buffer_half_float",
+      "EXT_float_blend", "EXT_frag_depth", "EXT_shader_texture_lod",
+      "EXT_texture_filter_anisotropic", "EXT_sRGB",
+      "KHR_parallel_shader_compile", "OES_element_index_uint",
+      "OES_standard_derivatives", "OES_texture_float", "OES_texture_float_linear",
+      "OES_texture_half_float", "OES_texture_half_float_linear",
+      "OES_vertex_array_object", "WEBGL_color_buffer_float",
+      "WEBGL_compressed_texture_s3tc", "WEBGL_debug_renderer_info",
+      "WEBGL_depth_texture", "WEBGL_draw_buffers", "WEBGL_lose_context"
+    ],
+    "max_texture_size": 16384,
+    "max_anisotropy": 16
+  },
+  "canvas": {
+    "hashes": [
+      "7a1f3e9b2c4d8f0e",
+      "3b8e2a6c9d1f4e7a",
+      "f0e4d1c8b6a3e9f2"
+    ],
+    "variance": 3
+  },
+  "audio": {
+    "hashes": [
+      "-58.2341,-60.8765,-62.1234,-64.5678,-65.9012,-66.3456,-68.7890,-69.0123",
+      "-58.9012,-61.2345,-63.6789,-64.0123,-65.4567,-66.8901,-68.2345,-69.6789",
+      "-57.5678,-60.0000,-62.4321,-64.8765,-65.2109,-66.6543,-68.0987,-69.5432"
+    ],
+    "variance": 3
+  },
+  "codecs": {
+    "common": {
+      "mp4": "probably",
+      "webm": "probably",
+      "h264": "probably",
+      "vp9": "probably"
+    },
+    "rare": {
+      "hevc": "",
+      "av1_p1": "probably",
+      "dolby_vision": ""
+    }
+  },
+  "fonts": {
+    "detected_count": 14,
+    "detected": ["Arial", "Courier New", "Times New Roman", "Verdana", "Helvetica",
+                 "Georgia", "Impact", "Trebuchet MS", "Comic Sans MS",
+                 "Arial Black", "Tahoma", "Helvetica Neue", "Palatino", "Geneva"],
+    "missing_os_bundled": ["Optima", "Futura", "Gill Sans", "Baskerville", "Didot",
+                           "American Typewriter", "San Francisco", "New York"]
+  },
+  "window": {
+    "inner_width": 1440,
+    "inner_height": 810,
+    "outer_width": 1440,
+    "outer_height": 858,
+    "screen_width": 2560,
+    "screen_height": 1600,
+    "device_pixel_ratio": 2.0,
+    "color_depth": 30,
+    "pixel_depth": 30
+  },
+  "chrome": {
+    "present": false,
+    "runtime_present": false,
+    "app_present": false,
+    "load_times_present": false,
+    "csi_present": false,
+    "runtime_connect_error": ""
+  },
+  "permissions": {
+    "notifications_state": "default",
+    "midi_state": "prompt",
+    "camera_state": "prompt"
+  },
+  "webrtc": {
+    "local_ips": ["10.0.0.42"],
+    "public_ip": ""
+  },
+  "dom": {
+    "iframe_content_window_identity": false,
+    "closed_shadow_root_accessible": false,
+    "document_element_keys": ["id", "title", "lang", "dir", "className",
+                               "innerHTML", "outerHTML", "textContent",
+                               "nodeType", "nodeName", "tagName", "dataset",
+                               "style", "attributes", "parentNode", "childNodes",
+                               "firstChild", "lastChild", "nextSibling", "previousSibling"]
+  },
+  "runtime": {
+    "function_to_string_native": true,
+    "console_debug_arity": 1,
+    "console_debug_to_string": "function debug() {\n    [native code]\n}",
+    "eval_length": 1,
+    "error_stack_contains_pw_sig": false
+  },
+  "speech": {
+    "voices_count": 4,
+    "voices": [
+      {"name": "Samantha", "lang": "en-US", "local": true},
+      {"name": "Alex", "lang": "en-US", "local": true},
+      {"name": "Victoria", "lang": "en-US", "local": true},
+      {"name": "Daniel", "lang": "en-GB", "local": true}
+    ]
+  },
+  "service_worker": {
+    "registered": true,
+    "controller": true,
+    "error": ""
+  },
+  "hairline": {
+    "non_modernizr_result": true
+  },
+  "timing": {
+    "collection_duration_ms": 1342,
+    "navigation_start": 1703000000000,
+    "dom_content_loaded": 1703000001789
+  }
+}

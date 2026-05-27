@@ -1,0 +1,158 @@
+{
+  "version": 1,
+  "_detection_signals": {
+    "console_debug_arity_zero": "SIGNAL (L3.3): StealthyFetcher uses patchright. console.debug.length=0 (patchright disables console API).",
+    "service_worker_no_op": "SIGNAL (L3.4): patchright patches serviceWorker.register. controller remains false.",
+    "google_referer_always": "SIGNAL (L2.2): Scrapling hardcodes Referer: https://www.google.com/ on all requests. Statistical anomaly when every request from same IP has Google referer.",
+    "sec_fetch_referer_mismatch": "SIGNAL (L2.4): Sec-Fetch-Site:none but Referer:google.com present (contradiction).",
+    "resource_blocking": "SIGNAL (L5.1): StealthyFetcher blocks fonts/images/media/beacon. No CSS, no font, no image requests observed for page load.",
+    "viewport_fixed": "SIGNAL (L5.4): StealthyFetcher uses 1920x1080 viewport pinned. All sessions have identical screen dimensions.",
+    "permissions_spoofed_only_notifications": "SIGNAL (L5.5): permissions.query only spoofs notifications. midi probe returns real value (prompt) not granted.",
+    "iframe_isolated_context": "SIGNAL (L3.6): patchright isolated context — iframe.contentWindow identity probe detects cross-realm mismatch.",
+    "platform_ua_mismatch": "SIGNAL (L4.4): navigator_platform typo in playwright-stealth. UA says Windows but platform is Linux."
+  },
+  "navigator": {
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
+    "platform": "Linux x86_64",
+    "vendor": "Google Inc.",
+    "languages": ["en-US", "en"],
+    "language": "en-US",
+    "hardware_concurrency": 4,
+    "device_memory": 8,
+    "webdriver": false,
+    "plugins": [
+      "Plugin: internal-pdf-viewer (application/pdf)",
+      "Plugin: internal-pdf-viewer (text/pdf)"
+    ],
+    "mime_types": ["application/pdf", "text/pdf"],
+    "oscpu": "",
+    "product": "Gecko",
+    "product_sub": "20030107"
+  },
+  "webgl": {
+    "vendor": "WebKit",
+    "renderer": "WebKit WebGL",
+    "unmasked_vendor": "Google Inc. (Intel)",
+    "unmasked_renderer": "ANGLE (Intel, Mesa Intel(R) UHD Graphics 630 (CFL GT2), OpenGL 4.6)",
+    "version": "WebGL 1.0 (OpenGL ES 2.0 Chromium)",
+    "shading_language_ver": "WebGL GLSL ES 1.0 (OpenGL ES GLSL ES 1.0 Chromium)",
+    "extensions": [
+      "ANGLE_instanced_arrays", "EXT_blend_minmax", "EXT_color_buffer_half_float",
+      "EXT_disjoint_timer_query", "EXT_float_blend", "EXT_frag_depth",
+      "EXT_shader_texture_lod", "EXT_texture_filter_anisotropic",
+      "WEBKIT_EXT_texture_filter_anisotropic", "EXT_sRGB",
+      "KHR_parallel_shader_compile", "OES_element_index_uint",
+      "OES_fbo_render_mipmap", "OES_standard_derivatives",
+      "OES_texture_float", "OES_texture_float_linear",
+      "OES_texture_half_float", "OES_texture_half_float_linear",
+      "OES_vertex_array_object", "WEBGL_color_buffer_float",
+      "WEBGL_compressed_texture_s3tc", "WEBGL_compressed_texture_s3tc_srgb",
+      "WEBGL_debug_renderer_info", "WEBGL_debug_shaders",
+      "WEBGL_depth_texture", "WEBGL_draw_buffers",
+      "WEBGL_lose_context", "WEBGL_multi_draw"
+    ],
+    "max_texture_size": 16384,
+    "max_anisotropy": 16
+  },
+  "canvas": {
+    "hashes": [
+      "a4e2f1c9b3d7e8a1",
+      "a4e2f1c9b3d7e8a1",
+      "a4e2f1c9b3d7e8a1"
+    ],
+    "variance": 1
+  },
+  "audio": {
+    "hashes": [
+      "-58.1234,-60.4321,-62.8765,-64.1029,-65.3874,-66.0021,-67.1234,-68.4567",
+      "-58.1234,-60.4321,-62.8765,-64.1029,-65.3874,-66.0021,-67.1234,-68.4567",
+      "-58.1234,-60.4321,-62.8765,-64.1029,-65.3874,-66.0021,-67.1234,-68.4567"
+    ],
+    "variance": 1
+  },
+  "codecs": {
+    "common": {
+      "mp4": "probably",
+      "webm": "probably",
+      "h264": "probably",
+      "vp9": "probably"
+    },
+    "rare": {
+      "hevc": "",
+      "av1_p1": "probably",
+      "dolby_vision": ""
+    }
+  },
+  "fonts": {
+    "detected_count": 12,
+    "detected": ["Arial", "Courier New", "Times New Roman", "Verdana", "Helvetica",
+                 "Tahoma", "DejaVu Sans", "Liberation Sans", "Ubuntu", "Noto Sans",
+                 "Liberation Mono", "DejaVu Serif"],
+    "missing_os_bundled": []
+  },
+  "window": {
+    "inner_width": 1920,
+    "inner_height": 1080,
+    "outer_width": 1920,
+    "outer_height": 1080,
+    "screen_width": 1920,
+    "screen_height": 1080,
+    "device_pixel_ratio": 1.0,
+    "color_depth": 24,
+    "pixel_depth": 24
+  },
+  "chrome": {
+    "present": true,
+    "runtime_present": true,
+    "app_present": true,
+    "load_times_present": true,
+    "csi_present": true,
+    "runtime_connect_error": "TypeError: chrome.runtime.connect is not a function"
+  },
+  "permissions": {
+    "notifications_state": "granted",
+    "midi_state": "prompt",
+    "camera_state": "prompt"
+  },
+  "webrtc": {
+    "local_ips": [],
+    "public_ip": ""
+  },
+  "dom": {
+    "iframe_content_window_identity": true,
+    "closed_shadow_root_accessible": false,
+    "document_element_keys": ["id", "title", "lang", "translate", "dir", "hidden",
+                               "accessKey", "draggable", "spellcheck", "autocapitalize",
+                               "contentEditable", "isContentEditable", "inputMode",
+                               "offsetParent", "offsetTop", "offsetLeft",
+                               "offsetWidth", "offsetHeight", "style", "tabIndex"]
+  },
+  "runtime": {
+    "function_to_string_native": true,
+    "console_debug_arity": 0,
+    "console_debug_to_string": "function debug() { [native code] }",
+    "eval_length": 1,
+    "error_stack_contains_pw_sig": false
+  },
+  "speech": {
+    "voices_count": 3,
+    "voices": [
+      {"name": "Google US English", "lang": "en-US", "local": false},
+      {"name": "Google UK English Female", "lang": "en-GB", "local": false},
+      {"name": "Google UK English Male", "lang": "en-GB", "local": false}
+    ]
+  },
+  "service_worker": {
+    "registered": false,
+    "controller": false,
+    "error": "ServiceWorker registration no-op: patchright patches navigator.serviceWorker.register"
+  },
+  "hairline": {
+    "non_modernizr_result": false
+  },
+  "timing": {
+    "collection_duration_ms": 198,
+    "navigation_start": 1703000000000,
+    "dom_content_loaded": 1703000000287
+  }
+}

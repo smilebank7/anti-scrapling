@@ -1,0 +1,4 @@
+TODO: Replace with real capture.
+curl_cffi impersonates Chrome 131 H2 SETTINGS but has subtle differences.
+Key detection: PRIORITY frames absent in some curl_cffi versions.
+Expected Akamai H2 fingerprint deviates from real Chrome 131.

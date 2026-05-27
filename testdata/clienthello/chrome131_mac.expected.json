@@ -1,0 +1,19 @@
+{
+  "profile": "chrome131_mac",
+  "ja3": "771,4865-4866-4867-49195-49199-49196-49200-52393-52392-49171-49172-156-157-47-53,0-23-65281-10-11-35-16-5-13-18-51-45-43-27-17513,29-23-24,0",
+  "ja3_hash": "e1d8b04eeb8ef3954ec4f49267a783ef",
+  "ja4": "t13d1515h2_dea800f94266_b7c7eda127ef",
+  "browser_family": "chrome",
+  "version_hint": 131,
+  "is_scraper_library": false,
+  "alpn": [
+    "h2",
+    "http/1.1"
+  ],
+  "os": "macos",
+  "session_id_len": 32,
+  "notes": "Chrome 131 macOS. TLS fingerprint identical to Linux (Chrome does not vary TLS by OS). macOS produces same JA3/JA4 as Linux Chrome 131. Different GREASE value (0x3A3A) used for variety in hex illustration only.",
+  "sources": [
+    "https://tls.peet.ws/"
+  ]
+}

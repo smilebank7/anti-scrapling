@@ -1,0 +1,30 @@
+{
+  "profile": "python_requests_get",
+  "header_order": [
+    "Host",
+    "User-Agent",
+    "Accept-Encoding",
+    "Accept",
+    "Connection"
+  ],
+  "ua_ch_consistency": false,
+  "sec_ch_ua_present": false,
+  "sec_fetch_present": false,
+  "user_agent": "python-requests/2.32.3",
+  "sec_ch_ua_platform": null,
+  "sec_ch_ua_mobile": null,
+  "accept_encoding": "gzip, deflate, br",
+  "browser_family": "python-requests",
+  "version_hint": null,
+  "is_scraper_library": true,
+  "scraper_library": "python-requests",
+  "anomalies": [
+    "User-Agent reveals library name (python-requests/x.y.z)",
+    "Accept: */* is not browser-like",
+    "No Sec-Fetch-* headers",
+    "No sec-ch-ua headers",
+    "Only 5 headers total (browsers send 13+)",
+    "Accept-Encoding missing zstd"
+  ],
+  "notes": "python-requests with default settings. Trivially detectable: User-Agent exposes library identity, minimal header set, Accept:*/* instead of browser-specific MIME types. Real Scrapling usage with browserforge headers completely masks this profile."
+}

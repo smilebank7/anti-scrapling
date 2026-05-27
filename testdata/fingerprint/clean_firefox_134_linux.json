@@ -1,0 +1,145 @@
+{
+  "version": 1,
+  "navigator": {
+    "user_agent": "Mozilla/5.0 (X11; Linux x86_64; rv:134.0) Gecko/20100101 Firefox/134.0",
+    "platform": "Linux x86_64",
+    "vendor": "",
+    "languages": ["en-US", "en"],
+    "language": "en-US",
+    "hardware_concurrency": 8,
+    "device_memory": 8,
+    "webdriver": false,
+    "plugins": [],
+    "mime_types": [],
+    "oscpu": "Linux x86_64",
+    "product": "Gecko",
+    "product_sub": "20100101"
+  },
+  "webgl": {
+    "vendor": "Mozilla",
+    "renderer": "Mozilla",
+    "unmasked_vendor": "Mesa/X.org",
+    "unmasked_renderer": "Mesa Intel(R) UHD Graphics 630 (CFL GT2)",
+    "version": "WebGL 1.0",
+    "shading_language_ver": "WebGL GLSL ES 1.0",
+    "extensions": [
+      "ANGLE_instanced_arrays", "EXT_blend_minmax", "EXT_color_buffer_half_float",
+      "EXT_float_blend", "EXT_frag_depth", "EXT_shader_texture_lod",
+      "EXT_texture_compression_bptc", "EXT_texture_compression_rgtc",
+      "EXT_texture_filter_anisotropic", "EXT_sRGB",
+      "KHR_parallel_shader_compile", "MOZ_debug", "OES_element_index_uint",
+      "OES_fbo_render_mipmap", "OES_standard_derivatives",
+      "OES_texture_float", "OES_texture_float_linear",
+      "OES_texture_half_float", "OES_texture_half_float_linear",
+      "OES_vertex_array_object", "WEBGL_color_buffer_float",
+      "WEBGL_compressed_texture_s3tc", "WEBGL_compressed_texture_s3tc_srgb",
+      "WEBGL_debug_renderer_info", "WEBGL_debug_shaders",
+      "WEBGL_depth_texture", "WEBGL_draw_buffers", "WEBGL_lose_context"
+    ],
+    "max_texture_size": 16384,
+    "max_anisotropy": 16
+  },
+  "canvas": {
+    "hashes": [
+      "c8d4e7f1a2b9c3d4",
+      "c8d4e7f1a2b9c3d4",
+      "c8d4e7f1a2b9c3d4"
+    ],
+    "variance": 1
+  },
+  "audio": {
+    "hashes": [
+      "-57.2345,-60.1234,-62.5678,-64.3456,-65.7890,-66.4321,-68.0000,-69.2345",
+      "-57.2345,-60.1234,-62.5678,-64.3456,-65.7890,-66.4321,-68.0000,-69.2345",
+      "-57.2345,-60.1234,-62.5678,-64.3456,-65.7890,-66.4321,-68.0000,-69.2345"
+    ],
+    "variance": 1
+  },
+  "codecs": {
+    "common": {
+      "mp4": "probably",
+      "webm": "probably",
+      "h264": "probably",
+      "vp9": "probably"
+    },
+    "rare": {
+      "hevc": "",
+      "av1_p1": "probably",
+      "dolby_vision": ""
+    }
+  },
+  "fonts": {
+    "detected_count": 10,
+    "detected": ["Arial", "Courier New", "Times New Roman", "Verdana",
+                 "DejaVu Sans", "Liberation Sans", "Ubuntu", "Noto Sans",
+                 "Liberation Mono", "DejaVu Serif"],
+    "missing_os_bundled": []
+  },
+  "window": {
+    "inner_width": 1280,
+    "inner_height": 720,
+    "outer_width": 1280,
+    "outer_height": 786,
+    "screen_width": 1920,
+    "screen_height": 1080,
+    "device_pixel_ratio": 1.0,
+    "color_depth": 24,
+    "pixel_depth": 24
+  },
+  "chrome": {
+    "present": false,
+    "runtime_present": false,
+    "app_present": false,
+    "load_times_present": false,
+    "csi_present": false,
+    "runtime_connect_error": ""
+  },
+  "permissions": {
+    "notifications_state": "default",
+    "midi_state": "prompt",
+    "camera_state": "prompt"
+  },
+  "webrtc": {
+    "local_ips": ["192.168.1.73"],
+    "public_ip": ""
+  },
+  "dom": {
+    "iframe_content_window_identity": false,
+    "closed_shadow_root_accessible": false,
+    "document_element_keys": ["id", "title", "lang", "dir", "className", "innerHTML",
+                               "outerHTML", "textContent", "nodeType", "nodeName",
+                               "nodeValue", "tagName", "dataset", "style",
+                               "attributes", "parentNode", "childNodes",
+                               "firstChild", "lastChild", "nextSibling"]
+  },
+  "runtime": {
+    "function_to_string_native": true,
+    "console_debug_arity": 1,
+    "console_debug_to_string": "function debug() {\n    [native code]\n}",
+    "eval_length": 1,
+    "error_stack_contains_pw_sig": false
+  },
+  "speech": {
+    "voices_count": 5,
+    "voices": [
+      {"name": "Mozilla", "lang": "en-US", "local": true},
+      {"name": "Orca", "lang": "en-US", "local": true},
+      {"name": "eSpeak NG English (Great Britain)", "lang": "en-GB", "local": true},
+      {"name": "Google US English", "lang": "en-US", "local": false},
+      {"name": "Google UK English Female", "lang": "en-GB", "local": false}
+    ]
+  },
+  "service_worker": {
+    "registered": true,
+    "controller": true,
+    "error": ""
+  },
+  "hairline": {
+    "non_modernizr_result": true
+  },
+  "timing": {
+    "collection_duration_ms": 923,
+    "navigation_start": 1703000000000,
+    "dom_content_loaded": 1703000001456
+  }
+}

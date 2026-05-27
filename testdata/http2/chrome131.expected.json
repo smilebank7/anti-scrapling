@@ -1,0 +1,23 @@
+{
+  "profile": "chrome131",
+  "akamai_h2_fingerprint": "1:65536,3:1000,4:6291456,6:262144|15663105|0|m,a,s,p",
+  "ja4h": "ge11cn060000_7c8a3eaa8540_2c6e4f16ff14",
+  "settings": {
+    "HEADER_TABLE_SIZE": 65536,
+    "MAX_CONCURRENT_STREAMS": 1000,
+    "INITIAL_WINDOW_SIZE": 6291456,
+    "MAX_HEADER_LIST_SIZE": 262144
+  },
+  "window_update_increment": 15663105,
+  "pseudo_header_order": ["method", "authority", "scheme", "path"],
+  "priority_frames": [],
+  "browser_family": "chrome",
+  "version_hint": 131,
+  "is_scraper_library": false,
+  "notes": "Chrome 131 H2 SETTINGS from Akamai passive fingerprinting research. WINDOW_UPDATE=15663105 is Chrome's characteristic large window. Pseudo-header order m,a,s,p (method/authority/scheme/path) is Chrome canonical order. Real binary capture pending (W1-T2). See chrome131.bin.placeholder.",
+  "sources": [
+    "https://www.akamai.com/blog/security/passive-os-fingerprinting",
+    "https://www.akamai.com/blog/security/the-fingerprints-of-tls-and-http2",
+    "https://github.com/nicowillis/tls-fingerprints"
+  ]
+}

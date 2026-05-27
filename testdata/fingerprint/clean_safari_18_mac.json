@@ -1,0 +1,148 @@
+{
+  "version": 1,
+  "navigator": {
+    "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.2 Safari/605.1.15",
+    "platform": "MacIntel",
+    "vendor": "Apple Computer, Inc.",
+    "languages": ["en-US", "en"],
+    "language": "en-US",
+    "hardware_concurrency": 10,
+    "device_memory": 16,
+    "webdriver": false,
+    "plugins": [],
+    "mime_types": [],
+    "oscpu": "",
+    "product": "Gecko",
+    "product_sub": "20030107"
+  },
+  "webgl": {
+    "vendor": "WebKit",
+    "renderer": "WebKit WebGL",
+    "unmasked_vendor": "Apple Inc.",
+    "unmasked_renderer": "Apple M1 Pro",
+    "version": "WebGL 1.0",
+    "shading_language_ver": "WebGL GLSL ES 1.0",
+    "extensions": [
+      "ANGLE_instanced_arrays", "EXT_blend_minmax", "EXT_color_buffer_half_float",
+      "EXT_float_blend", "EXT_frag_depth", "EXT_shader_texture_lod",
+      "EXT_texture_compression_bptc", "EXT_texture_compression_rgtc",
+      "EXT_texture_filter_anisotropic", "EXT_sRGB",
+      "KHR_parallel_shader_compile", "OES_element_index_uint",
+      "OES_fbo_render_mipmap", "OES_standard_derivatives",
+      "OES_texture_float", "OES_texture_float_linear",
+      "OES_texture_half_float", "OES_texture_half_float_linear",
+      "OES_vertex_array_object", "WEBGL_color_buffer_float",
+      "WEBGL_compressed_texture_astc", "WEBGL_compressed_texture_etc",
+      "WEBGL_compressed_texture_pvrtc", "WEBKIT_WEBGL_compressed_texture_pvrtc",
+      "WEBGL_debug_renderer_info", "WEBGL_depth_texture",
+      "WEBGL_draw_buffers", "WEBGL_lose_context"
+    ],
+    "max_texture_size": 16384,
+    "max_anisotropy": 16
+  },
+  "canvas": {
+    "hashes": [
+      "f1e2d3c4b5a6f7e8",
+      "f1e2d3c4b5a6f7e8",
+      "f1e2d3c4b5a6f7e8"
+    ],
+    "variance": 1
+  },
+  "audio": {
+    "hashes": [
+      "-55.4321,-58.7654,-61.2109,-63.5432,-65.0000,-66.2345,-67.8765,-69.0123",
+      "-55.4321,-58.7654,-61.2109,-63.5432,-65.0000,-66.2345,-67.8765,-69.0123",
+      "-55.4321,-58.7654,-61.2109,-63.5432,-65.0000,-66.2345,-67.8765,-69.0123"
+    ],
+    "variance": 1
+  },
+  "codecs": {
+    "common": {
+      "mp4": "probably",
+      "webm": "",
+      "h264": "probably",
+      "vp9": "probably"
+    },
+    "rare": {
+      "hevc": "probably",
+      "av1_p1": "maybe",
+      "dolby_vision": "probably"
+    }
+  },
+  "fonts": {
+    "detected_count": 22,
+    "detected": ["Arial", "Courier New", "Times New Roman", "Verdana", "Helvetica",
+                 "Georgia", "Palatino", "Impact", "Trebuchet MS", "Comic Sans MS",
+                 "Arial Black", "Lucida Console", "Tahoma", "Optima", "Futura",
+                 "Gill Sans", "Baskerville", "Didot", "American Typewriter",
+                 "Helvetica Neue", "San Francisco", "New York"],
+    "missing_os_bundled": []
+  },
+  "window": {
+    "inner_width": 1440,
+    "inner_height": 810,
+    "outer_width": 1440,
+    "outer_height": 858,
+    "screen_width": 2560,
+    "screen_height": 1600,
+    "device_pixel_ratio": 2.0,
+    "color_depth": 30,
+    "pixel_depth": 30
+  },
+  "chrome": {
+    "present": false,
+    "runtime_present": false,
+    "app_present": false,
+    "load_times_present": false,
+    "csi_present": false,
+    "runtime_connect_error": ""
+  },
+  "permissions": {
+    "notifications_state": "default",
+    "midi_state": "prompt",
+    "camera_state": "prompt"
+  },
+  "webrtc": {
+    "local_ips": ["192.168.1.20"],
+    "public_ip": ""
+  },
+  "dom": {
+    "iframe_content_window_identity": false,
+    "closed_shadow_root_accessible": false,
+    "document_element_keys": ["id", "title", "lang", "dir", "className",
+                               "innerHTML", "outerHTML", "textContent",
+                               "nodeType", "nodeName", "tagName", "dataset",
+                               "style", "attributes", "parentNode", "childNodes",
+                               "firstChild", "lastChild", "nextSibling", "previousSibling"]
+  },
+  "runtime": {
+    "function_to_string_native": true,
+    "console_debug_arity": 1,
+    "console_debug_to_string": "function debug() { [native code] }",
+    "eval_length": 1,
+    "error_stack_contains_pw_sig": false
+  },
+  "speech": {
+    "voices_count": 18,
+    "voices": [
+      {"name": "Samantha", "lang": "en-US", "local": true},
+      {"name": "Alex", "lang": "en-US", "local": true},
+      {"name": "Victoria", "lang": "en-US", "local": true},
+      {"name": "Daniel", "lang": "en-GB", "local": true},
+      {"name": "Karen", "lang": "en-AU", "local": true}
+    ]
+  },
+  "service_worker": {
+    "registered": true,
+    "controller": true,
+    "error": ""
+  },
+  "hairline": {
+    "non_modernizr_result": true
+  },
+  "timing": {
+    "collection_duration_ms": 654,
+    "navigation_start": 1703000000000,
+    "dom_content_loaded": 1703000000987
+  }
+}

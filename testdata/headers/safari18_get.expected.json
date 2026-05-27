@@ -1,0 +1,22 @@
+{
+  "profile": "safari18_get",
+  "header_order": [
+    "Host",
+    "Connection",
+    "Accept",
+    "User-Agent",
+    "Accept-Language",
+    "Accept-Encoding"
+  ],
+  "ua_ch_consistency": true,
+  "sec_ch_ua_present": false,
+  "sec_fetch_present": false,
+  "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.2 Safari/605.1.15",
+  "sec_ch_ua_platform": null,
+  "sec_ch_ua_mobile": null,
+  "accept_encoding": "gzip, deflate, br",
+  "browser_family": "safari",
+  "version_hint": 18,
+  "is_scraper_library": false,
+  "notes": "Safari 18 macOS. Key differences: NO sec-ch-ua, NO Sec-Fetch-* headers, NO zstd in Accept-Encoding (Safari doesn't support zstd), Accept has no image/avif (Safari 18 limited), fewer headers overall. Accept order: Accept before User-Agent (Safari-specific). The absence of Sec-Fetch-* is a Safari/non-Chromium signal."
+}

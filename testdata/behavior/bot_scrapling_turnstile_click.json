@@ -1,0 +1,57 @@
+{
+  "session_id": "sess_e5f6a7b8c9d0",
+  "page_url": "https://example.com/protected",
+  "page_visible": true,
+  "visit_duration_ms": 1847,
+  "scroll": {
+    "events": 0,
+    "max_depth_px": 0,
+    "max_depth_pct": 0,
+    "velocity_px_per_sec_mean": 0.0,
+    "velocity_px_per_sec_max": 0.0,
+    "direction_changes": 0
+  },
+  "mouse": {
+    "move_events": 1,
+    "click_events": 1,
+    "jitter_mean_px": 0.0,
+    "jitter_max_px": 0.0,
+    "path_straightness": 1.0,
+    "idle_periods_count": 0,
+    "longest_idle_ms": 0
+  },
+  "clicks": [
+    {
+      "x": 960,
+      "y": 540,
+      "timestamp_ms": 143,
+      "target_tag": "DIV",
+      "delay_since_prev_ms": 143,
+      "delay_distribution_note": "randint(100,200) — Scrapling Turnstile clicker uses random.randint(100,200) ms delay (L5.3)"
+    }
+  ],
+  "key_events": 0,
+  "resource_requests": {
+    "css": 0,
+    "fonts": 0,
+    "images": 0,
+    "scripts": 1,
+    "beacons": 0
+  },
+  "attention": {
+    "focus_events": 1,
+    "blur_events": 0,
+    "visibility_changes": 0,
+    "hidden_duration_ms": 0
+  },
+  "timing_anomalies": {
+    "constant_interval_clicks": false,
+    "suspiciously_fast_scroll": false,
+    "zero_jitter_mouse": true,
+    "single_click_no_exploration": true,
+    "click_delay_in_100_200ms_band": true,
+    "no_mouse_movement_before_click": true,
+    "perfect_center_click": true
+  },
+  "_detection_notes": "Scrapling automatic Turnstile solver. Pattern: detect challenges.cloudflare.com/turnstile/v script, click at fixed coordinates with randint(100,200)ms delay (hardcoded in Scrapling source). Signatures: (1) single click within 100-200ms of page load; (2) zero mouse movement before click; (3) zero jitter; (4) no scroll/keyboard; (5) click x=960,y=540 is exact center of 1920x1080 viewport (viewport pinning L5.4)."
+}

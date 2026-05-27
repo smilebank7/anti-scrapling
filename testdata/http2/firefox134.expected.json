@@ -1,0 +1,21 @@
+{
+  "profile": "firefox134",
+  "akamai_h2_fingerprint": "1:65536,4:131072,5:16384|12517377|0|m,a,s,p",
+  "ja4h": "ge11cn060000_b5d4f0c8a3d1_e17a92c3b8f4",
+  "settings": {
+    "HEADER_TABLE_SIZE": 65536,
+    "INITIAL_WINDOW_SIZE": 131072,
+    "MAX_FRAME_SIZE": 16384
+  },
+  "window_update_increment": 12517377,
+  "pseudo_header_order": ["method", "authority", "scheme", "path"],
+  "priority_frames": [],
+  "browser_family": "firefox",
+  "version_hint": 134,
+  "is_scraper_library": false,
+  "notes": "Firefox 134 H2 SETTINGS. Key differences from Chrome: smaller INITIAL_WINDOW_SIZE (131072 vs 6291456), no MAX_CONCURRENT_STREAMS in SETTINGS frame, different WINDOW_UPDATE value. Real binary capture pending (W1-T2).",
+  "sources": [
+    "https://www.akamai.com/blog/security/passive-os-fingerprinting",
+    "https://github.com/nicowillis/tls-fingerprints"
+  ]
+}

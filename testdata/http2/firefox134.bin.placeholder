@@ -1,0 +1,3 @@
+TODO: Replace with real Wireshark capture of Firefox 134 HTTP/2 connection preface.
+Expected Akamai H2 fingerprint: 1:65536,4:131072,5:16384|12517377|0|m,a,s,p
+Firefox 134 SETTINGS differ from Chrome: no ENABLE_PUSH, INITIAL_WINDOW_SIZE=131072.

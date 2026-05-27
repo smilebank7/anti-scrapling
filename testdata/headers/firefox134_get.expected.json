@@ -1,0 +1,27 @@
+{
+  "profile": "firefox134_get",
+  "header_order": [
+    "Host",
+    "User-Agent",
+    "Accept",
+    "Accept-Language",
+    "Accept-Encoding",
+    "Connection",
+    "Upgrade-Insecure-Requests",
+    "Sec-Fetch-Dest",
+    "Sec-Fetch-Mode",
+    "Sec-Fetch-Site",
+    "Sec-Fetch-User"
+  ],
+  "ua_ch_consistency": true,
+  "sec_ch_ua_present": false,
+  "sec_fetch_present": true,
+  "user_agent": "Mozilla/5.0 (X11; Linux x86_64; rv:134.0) Gecko/20100101 Firefox/134.0",
+  "sec_ch_ua_platform": null,
+  "sec_ch_ua_mobile": null,
+  "accept_encoding": "gzip, deflate, br, zstd",
+  "browser_family": "firefox",
+  "version_hint": 134,
+  "is_scraper_library": false,
+  "notes": "Firefox 134 Linux. Key differences from Chrome: NO sec-ch-ua headers (Firefox doesn't implement Client Hints); User-Agent comes before Accept (different ordering); Accept includes image/avif,image/webp but NOT signed-exchange; Accept-Language value uses comma-separated with semicolon weights. Sec-Fetch-* present but no Client Hints = strong Firefox signal."
+}

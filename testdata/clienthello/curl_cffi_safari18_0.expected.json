@@ -1,0 +1,21 @@
+{
+  "profile": "curl_cffi_safari18_0",
+  "ja3": "771,4865-4866-4867-49196-49200-49195-49199-52393-52392-49161-49162-49171-49172-156-157-47-53-255,0-23-65281-10-11-16-5-13-18-51-45-43-21-41,29-23-24,0",
+  "ja3_hash": "9c4409ff1b0096116f2dcc9e696e1588",
+  "ja4": "t13d1714h2_ca21dff6868a_7d784a25af34",
+  "browser_family": "safari",
+  "version_hint": 18,
+  "is_scraper_library": true,
+  "alpn": [
+    "h2",
+    "http/1.1"
+  ],
+  "os": "n/a",
+  "scraper_library": "curl_cffi",
+  "impersonates": "safari18_0",
+  "session_id_len": 0,
+  "notes": "curl_cffi impersonate=safari18_0. JA3 matches Safari 18 closely. Primary differentiator: H2 fingerprint differs because Safari uses a different SETTINGS frame sequence.",
+  "sources": [
+    "https://github.com/lexiforest/curl_cffi"
+  ]
+}

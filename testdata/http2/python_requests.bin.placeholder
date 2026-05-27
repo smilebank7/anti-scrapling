@@ -1,0 +1,4 @@
+N/A: python-requests does NOT support HTTP/2 by default.
+urllib3 (the transport layer) is HTTP/1.1 only unless httpx is used.
+This profile is HTTP/1.1 only. See headers/python_requests_get.txt.
+If requests[http2] or httpx is used, a separate profile would apply.

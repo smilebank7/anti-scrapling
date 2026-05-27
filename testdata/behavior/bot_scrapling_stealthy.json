@@ -1,0 +1,47 @@
+{
+  "session_id": "sess_d4e5f6a7b8c9",
+  "page_url": "https://example.com/products/widget-pro",
+  "page_visible": false,
+  "visit_duration_ms": 2341,
+  "scroll": {
+    "events": 0,
+    "max_depth_px": 0,
+    "max_depth_pct": 0,
+    "velocity_px_per_sec_mean": 0.0,
+    "velocity_px_per_sec_max": 0.0,
+    "direction_changes": 0
+  },
+  "mouse": {
+    "move_events": 0,
+    "click_events": 0,
+    "jitter_mean_px": 0.0,
+    "jitter_max_px": 0.0,
+    "path_straightness": 0.0,
+    "idle_periods_count": 0,
+    "longest_idle_ms": 0
+  },
+  "clicks": [],
+  "key_events": 0,
+  "resource_requests": {
+    "css": 0,
+    "fonts": 0,
+    "images": 0,
+    "scripts": 0,
+    "beacons": 0
+  },
+  "attention": {
+    "focus_events": 0,
+    "blur_events": 0,
+    "visibility_changes": 1,
+    "hidden_duration_ms": 2341
+  },
+  "timing_anomalies": {
+    "constant_interval_clicks": false,
+    "suspiciously_fast_scroll": false,
+    "zero_jitter_mouse": true,
+    "page_never_visible": true,
+    "no_resource_fetches": true,
+    "sub_3s_extraction": true
+  },
+  "_detection_notes": "Scrapling StealthyFetcher with resource blocking. Page never became visible (headless). No mouse, scroll, or keyboard events. CSS/font/image fetches all blocked (resource type blocking, L5.1). Extraction completed in <3 seconds. All behavioral signals indicate automated extraction."
+}
