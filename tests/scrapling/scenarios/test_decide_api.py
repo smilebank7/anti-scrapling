@@ -24,9 +24,9 @@ def test_decide_returns_valid_decision(decide_url: str) -> None:
         f"/v1/decide returned HTTP {resp.status_code}; expected 200. Body: {resp.text!r}"
     )
     data = resp.json()
-    assert "Verdict" in data, f"Response JSON missing 'Verdict' field: {data}"
-    assert data["Verdict"] in _VALID_VERDICTS, (
-        f"Verdict {data['Verdict']!r} is not one of {_VALID_VERDICTS}"
+    assert "verdict" in data, f"Response JSON missing 'verdict' field: {data}"
+    assert data["verdict"] in _VALID_VERDICTS, (
+        f"Verdict {data['verdict']!r} is not one of {_VALID_VERDICTS}"
     )
 
 
@@ -47,8 +47,8 @@ def test_decide_known_scraper_returns_deny(decide_url: str) -> None:
         f"/v1/decide returned HTTP {resp.status_code}. Body: {resp.text!r}"
     )
     data = resp.json()
-    assert data.get("Verdict") == "DENY", (
+    assert data.get("verdict") == "DENY", (
         f"Expected DENY for python-requests JA3 hash ({_PYTHON_REQUESTS_JA3_HASH}) "
-        f"which is deny-listed in families.go, but got Verdict={data.get('Verdict')!r}. "
+        f"which is deny-listed in families.go, but got verdict={data.get('verdict')!r}. "
         f"Full response: {data}"
     )

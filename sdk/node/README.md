@@ -7,7 +7,7 @@ Node.js SDK for the anti-scrapling firewall — Express and NestJS adapters.
 - Node.js ≥ 18
 - Anti-scrapling daemon accessible at the configured URL
 
-> **Note:** The daemon's `/v1/decide` endpoint requires `--decide-bind :9092` (planned for a future daemon revision). Until then the SDK gracefully degrades via `failOpen`.
+> **Note:** The daemon serves `/v1/decide` on the admin port (`--admin-bind`, default `:9091`). Point `daemonUrl` at `http://<host>:9091`. The SDK gracefully degrades via `failOpen` if the daemon is unreachable.
 
 ## Install
 
@@ -24,7 +24,7 @@ import { antiScrapling } from '@anti-scrapling/node/express';
 const app = express();
 
 app.use(antiScrapling({
-  daemonUrl: 'http://localhost:9092',
+  daemonUrl: 'http://localhost:9091',
   timeoutMs: 200,
   failOpen: true,
 }));
@@ -44,7 +44,7 @@ import { AntiScraplingGuard } from '@anti-scrapling/node/nestjs';
   providers: [
     {
       provide: APP_GUARD,
-      useFactory: () => new AntiScraplingGuard({ daemonUrl: 'http://localhost:9092' }),
+      useFactory: () => new AntiScraplingGuard({ daemonUrl: 'http://localhost:9091' }),
     },
   ],
 })

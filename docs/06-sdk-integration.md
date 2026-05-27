@@ -8,24 +8,23 @@ The Anti-Scrapling SDKs let you embed bot detection directly into your applicati
 
 ## Prerequisites
 
-The daemon must be running and reachable from your application. Start it with the `--decide-bind` flag to expose the decision API:
+The daemon must be running and reachable from your application. The decision API (`/v1/decide`) is served on the admin port, controlled by `--admin-bind` (default `:9091`):
 
 ```bash
 ./bin/antiscrapling \
   --config policies/default.yaml \
-  --decide-bind :9092
+  --admin-bind :9091
 ```
 
-Or with Docker:
+Or with Docker (admin port is `:9091` by default — expose it explicitly):
 
 ```bash
-docker run -p 9092:9092 \
+docker run -p 8080:8080 -p 9091:9091 \
   -e AS_TARGET=http://your-app:3000 \
-  -e AS_DECIDE_BIND=:9092 \
   ghcr.io/anti-scrapling/anti-scrapling:latest
 ```
 
-The daemon's proxy port (8080) is not used in SDK mode. Only the decision API port (9092) matters.
+The daemon's proxy port (8080) is not used in SDK mode. Only the admin/decision API port (9091) matters.
 
 ---
 
@@ -46,7 +45,7 @@ import { antiScrapling } from '@anti-scrapling/node/express';
 const app = express();
 
 app.use(antiScrapling({
-  daemonUrl: 'http://localhost:9092',
+  daemonUrl: 'http://localhost:9091',
   timeoutMs: 200,
   failOpen: true,
 }));
@@ -71,7 +70,7 @@ Apply the middleware to specific routes instead of globally:
 ```typescript
 import { antiScrapling } from '@anti-scrapling/node/express';
 
-const botGuard = antiScrapling({ daemonUrl: 'http://localhost:9092' });
+const botGuard = antiScrapling({ daemonUrl: 'http://localhost:9091' });
 
 // Only protect the scrape-sensitive endpoints
 app.get('/api/products', botGuard, (req, res) => { ... });
@@ -90,7 +89,7 @@ import { AntiScraplingGuard } from '@anti-scrapling/node/nestjs';
     {
       provide: APP_GUARD,
       useFactory: () => new AntiScraplingGuard({
-        daemonUrl: 'http://localhost:9092',
+        daemonUrl: 'http://localhost:9091',
         timeoutMs: 200,
         failOpen: true,
       }),
@@ -100,26 +99,13 @@ import { AntiScraplingGuard } from '@anti-scrapling/node/nestjs';
 export class AppModule {}
 ```
 
-The guard runs before every controller method. To exempt specific routes, use the `@SkipAntiScrapling()` decorator:
-
-```typescript
-import { SkipAntiScrapling } from '@anti-scrapling/node/nestjs';
-
-@Controller('health')
-export class HealthController {
-  @Get()
-  @SkipAntiScrapling()
-  check() {
-    return { status: 'ok' };
-  }
-}
-```
+The guard runs before every controller method. Per-route opt-out (a `@SkipAntiScrapling()` decorator) is not yet implemented; it is planned for v0.2. Until then, register the guard only on specific modules or use Express middleware instead of the global guard for finer-grained control.
 
 ### Node SDK configuration options
 
 | Option | Type | Default | Description |
 |--------|------|---------|-------------|
-| `daemonUrl` | string | required | Base URL of the daemon's decision API, e.g. `http://localhost:9092` |
+| `daemonUrl` | string | required | Base URL of the daemon's decision API, e.g. `http://localhost:9091` |
 | `timeoutMs` | number | `200` | Timeout for the `/v1/decide` HTTP call in milliseconds. If the daemon doesn't respond within this window, `failOpen` determines the outcome. |
 | `failOpen` | boolean | `true` | `true` = allow the request if the daemon is unreachable. `false` = deny. Set to `false` only if you're confident the daemon has high availability. |
 | `challengeUrl` | string | `/__as/challenge` | URL to redirect to on a CHALLENGE verdict. The original URL is appended as `?origin=<url>`. |
@@ -150,7 +136,7 @@ from anti_scrapling import Client, AntiScraplingMiddleware
 app = FastAPI()
 
 client = Client(
-    daemon_url="http://localhost:9092",
+    daemon_url="http://localhost:9091",
     timeout=0.2,
     fail_open=True,
 )
@@ -176,21 +162,7 @@ app.add_middleware(
 
 ### FastAPI: per-route dependency
 
-For finer-grained control, use a FastAPI dependency instead of global middleware:
-
-```python
-from fastapi import FastAPI, Depends
-from anti_scrapling import Client, require_clean
-
-app = FastAPI()
-client = Client(daemon_url="http://localhost:9092")
-
-@app.get("/api/prices", dependencies=[Depends(require_clean(client))])
-def prices():
-    return {"price": 9.99}
-```
-
-`require_clean` raises `HTTPException(403)` on DENY and `HTTPException(302)` on CHALLENGE.
+A `require_clean` FastAPI dependency (raises `HTTPException` on non-ALLOW verdicts) is planned for v0.2. Until then, apply `AntiScraplingMiddleware` globally and use `allow` rules in the policy YAML to exempt specific paths.
 
 ### Flask decorator
 
@@ -199,7 +171,7 @@ from flask import Flask, jsonify
 from anti_scrapling import Client, flask_middleware
 
 app = Flask(__name__)
-client = Client(daemon_url="http://localhost:9092")
+client = Client(daemon_url="http://localhost:9091")
 
 @app.route("/api/data")
 @flask_middleware(client)
@@ -211,22 +183,40 @@ The decorator wraps the route function. It calls the daemon synchronously (block
 
 ### Flask: global middleware
 
-To protect all routes:
+To protect all routes, apply `flask_middleware` as a `before_request` hook:
 
 ```python
-from flask import Flask
-from anti_scrapling import Client, FlaskMiddleware
+from flask import Flask, abort, redirect
+from anti_scrapling import Client, flask_middleware
 
 app = Flask(__name__)
-client = Client(daemon_url="http://localhost:9092")
-app = FlaskMiddleware(app, client=client)
+client = Client(daemon_url="http://localhost:9091")
+
+@app.before_request
+def bot_gate():
+    from flask import request
+    from anti_scrapling.types import DecisionRequest, Verdict
+    headers = {k.lower(): v for k, v in request.headers.items()}
+    req = DecisionRequest(
+        method=request.method,
+        path=request.full_path.rstrip("?"),
+        host=request.host,
+        remote_ip=request.remote_addr or "",
+        headers=headers,
+        header_order=list(request.headers.keys()),
+    )
+    decision = client.decide(req)
+    if decision.verdict == Verdict.DENY:
+        abort(403)
+    if decision.verdict == Verdict.CHALLENGE:
+        return redirect("/__as/challenge")
 ```
 
 ### Python SDK configuration options
 
 ```python
 Client(
-    daemon_url="http://localhost:9092",   # daemon base URL
+    daemon_url="http://localhost:9091",   # daemon base URL
     timeout=0.2,                           # per-request timeout in seconds
     fail_open=True,                        # True = allow on daemon error
 )
@@ -350,7 +340,7 @@ Log the daemon errors regardless of `failOpen` setting. The SDK emits a structur
 {
   "level": "warn",
   "msg": "anti-scrapling daemon unreachable",
-  "daemon_url": "http://localhost:9092",
+  "daemon_url": "http://localhost:9091",
   "error": "connection refused",
   "fail_open": true
 }

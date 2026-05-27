@@ -74,5 +74,12 @@ Batch 4a:
 Batch 4b:
 - **W4-T4**: CI gates on adversarial + browser [unspecified-low] — Done. GitHub Actions workflow runs unit tests, lint, adversarial E2E, and browser pass-through on every PR.
 
+## Planned for v0.2
+
+- **Honeypots**: Hidden links and form fields; any access triggers a 24 h IP ban via the decision cache. Add `policy.honeypots: [paths]` YAML field + handler in `cmd/antiscrapling/wire.go` + rule in `internal/policy/loader.go`. Removed from README detection table until implemented.
+- **JA3/JA4 in challenge verify**: Propagate TLS fingerprints to `HandleVerify` via a signed cookie set at the proxy layer, so the issued pass-token can bind to JA3/JA4.
+- **`require_clean` FastAPI dependency**: Per-route FastAPI dependency that raises `HTTPException` on non-ALLOW verdicts.
+- **Per-route opt-out (NestJS)**: `@SkipAntiScrapling()` decorator for exempting specific controller methods.
+
 ## Critical path
 W0-T1 → W1-T5 → W2-T3 → W3-T1 → W3-T5 → W4-T1 → W4-T4

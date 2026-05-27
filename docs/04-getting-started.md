@@ -96,9 +96,8 @@ The proxy listens on port 8080. Your app is now behind the detection pipeline.
 ### Binary
 
 ```bash
-./bin/antiscrapling \
-  --config my-policy.yaml \
-  --token-secret-file token.key
+AS_TOKEN_SECRET_FILE=token.key ./bin/antiscrapling \
+  --config my-policy.yaml
 ```
 
 ### Docker Compose

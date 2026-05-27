@@ -83,7 +83,7 @@ import express from 'express';
 import { antiScrapling } from '@anti-scrapling/node/express';
 
 const app = express();
-app.use(antiScrapling({ daemonUrl: 'http://localhost:9092' }));
+app.use(antiScrapling({ daemonUrl: 'http://localhost:9091' }));
 app.get('/', (req, res) => res.json({ ok: true }));
 app.listen(3000);
 ```
@@ -95,7 +95,7 @@ from fastapi import FastAPI
 from anti_scrapling import Client, AntiScraplingMiddleware
 
 app = FastAPI()
-client = Client(daemon_url="http://localhost:9092")
+client = Client(daemon_url="http://localhost:9091")
 app.add_middleware(AntiScraplingMiddleware, client=client)
 ```
 
@@ -112,7 +112,6 @@ SDK mode requires the daemon running separately. TLS-layer signals (JA3/JA4) are
 | **IP reputation** | Datacenter ASN, Tor exit nodes, mobile carrier (trust boost) | `datacenter_ip`, `tor_exit`, `mobile_ip` |
 | **JS challenge** | 40+ browser property probes: navigator, WebGL, canvas, audio, fonts, speech, service worker, shadow DOM | `nav_webdriver_set`, `canvas_seeded_noise`, `runtime_console_debug_disabled`, ... |
 | **Behavioral** | Resource-blocking patterns, mouse path geometry, Turnstile auto-click timing | `behavior_resource_block`, `behavior_smooth_path`, `behavior_turnstile_clicker` |
-| **Honeypots** | Hidden links and form fields; any access triggers an instant ban | (implicit deny) |
 
 ---
 

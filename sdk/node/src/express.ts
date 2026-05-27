@@ -23,7 +23,7 @@ export function antiScrapling(opts: ExpressOptions): RequestHandler {
       }
 
       const cookieHeader = (req.headers['cookie'] as string | undefined) ?? '';
-      const tokenMatch = /(?:^|;\s*)__as_token=([^;]*)/.exec(cookieHeader);
+      const tokenMatch = /(?:^|;\s*)__as_pass=([^;]*)/.exec(cookieHeader);
 
       const dreq: DecisionRequest = {
         method: req.method,
@@ -37,7 +37,7 @@ export function antiScrapling(opts: ExpressOptions): RequestHandler {
 
       const decision = await client.decide(dreq);
 
-      switch (decision.Verdict) {
+      switch (decision.verdict) {
         case 'ALLOW':
           next();
           break;
@@ -48,7 +48,7 @@ export function antiScrapling(opts: ExpressOptions): RequestHandler {
           break;
         }
         case 'DENY':
-          res.status(403).type('text/plain').send(decision.Reasons.join(', ') || 'Denied');
+          res.status(403).type('text/plain').send(decision.reasons.join(', ') || 'Denied');
           break;
         default:
           next();

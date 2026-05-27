@@ -61,7 +61,7 @@ export class AntiScraplingGuard implements CanActivate {
     }
 
     const cookieHeader = (req.headers?.['cookie'] as string | undefined) ?? '';
-    const tokenMatch = /(?:^|;\s*)__as_token=([^;]*)/.exec(cookieHeader);
+    const tokenMatch = /(?:^|;\s*)__as_pass=([^;]*)/.exec(cookieHeader);
 
     const dreq: DecisionRequest = {
       method: req.method ?? 'GET',
@@ -75,7 +75,7 @@ export class AntiScraplingGuard implements CanActivate {
 
     const decision = await this.client.decide(dreq);
 
-    switch (decision.Verdict) {
+    switch (decision.verdict) {
       case 'ALLOW':
         return true;
       case 'CHALLENGE': {
@@ -85,7 +85,7 @@ export class AntiScraplingGuard implements CanActivate {
         return false;
       }
       case 'DENY':
-        res.status(403).send(decision.Reasons.join(', ') || 'Denied');
+        res.status(403).send(decision.reasons.join(', ') || 'Denied');
         return false;
       default:
         return true;

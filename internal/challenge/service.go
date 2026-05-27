@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"math/bits"
+	"net"
 	"net/http"
 	"time"
 
@@ -18,6 +19,11 @@ const metaPlaceholder = `<meta name="__as_challenge" content='{"challenge_id":""
 
 type BeaconIngestor interface {
 	Ingest(beacon types.BehaviorBeacon) error
+}
+
+type beaconIngestorWithRequest interface {
+	BeaconIngestor
+	IngestFromRequest(r *http.Request, beacon types.BehaviorBeacon) error
 }
 
 type Service struct {
@@ -118,9 +124,22 @@ func (s *Service) HandleVerify(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	// Extract IP and User-Agent for token binding.
+	// JA3/JA4 are not available here because the challenge page is served over
+	// plain HTTP after the initial TLS redirect; the ClientHello capture lives
+	// on the proxy connection and is not propagated into the challenge sub-request.
+	// TODO(v0.2): propagate JA3/JA4 via a signed cookie set at the proxy layer.
+	clientIP, _, ipErr := net.SplitHostPort(r.RemoteAddr)
+	if ipErr != nil {
+		clientIP = r.RemoteAddr
+	}
+	clientUA := r.Header.Get("User-Agent")
+
 	tok, err := s.tokenIssuer.Issue(token.IssueContext{
 		FingerprintHash: req.ChallengeID,
 		Score:           total,
+		IP:              clientIP,
+		UA:              clientUA,
 	})
 	if err != nil {
 		http.Error(w, "token issuance failed", http.StatusInternalServerError)
@@ -149,7 +168,11 @@ func (s *Service) HandleBeacon(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if s.beacon != nil {
-		s.beacon.Ingest(b)
+		if full, ok := s.beacon.(beaconIngestorWithRequest); ok {
+			full.IngestFromRequest(r, b)
+		} else {
+			s.beacon.Ingest(b)
+		}
 	}
 
 	w.WriteHeader(http.StatusNoContent)

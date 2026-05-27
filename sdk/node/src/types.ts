@@ -13,18 +13,18 @@ export interface DecisionRequest {
 export type Verdict = 'ALLOW' | 'CHALLENGE' | 'DENY';
 
 export interface Signal {
-  Name: string;
-  Score: number;
-  Reason: string;
-  Detail?: Record<string, unknown>;
+  name: string;
+  score: number;
+  reason: string;
+  detail?: Record<string, unknown>;
 }
 
 export interface Decision {
-  Verdict: Verdict;
-  Score: number;
-  Signals: Signal[];
-  Reasons: string[];
-  PolicyName: string;
-  Timestamp: number;
-  RequestID: string;
+  verdict: Verdict;
+  score: number;
+  signals: Signal[];
+  reasons: string[];
+  policy_name: string;
+  timestamp: number;
+  request_id: string;
 }

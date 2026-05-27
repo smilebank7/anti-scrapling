@@ -115,7 +115,10 @@ func buildDeps(cfg *appConfig) (*deps, error) {
 	}
 	h2C := signalhttp2.NewCollector()
 
-	collectors := []types.SignalCollector{tlsC, headersC, ipC, h2C}
+	beaconStore := challenge.NewBeaconStore()
+	behaviorC := challenge.NewStoreBehaviorCollector(beaconStore)
+
+	collectors := []types.SignalCollector{tlsC, headersC, ipC, h2C, behaviorC}
 
 	eval, err := policy.NewEvaluator(cfg.Policy)
 	if err != nil {
@@ -144,7 +147,7 @@ func buildDeps(cfg *appConfig) (*deps, error) {
 	if err != nil {
 		return nil, fmt.Errorf("challenge issuer: %w", err)
 	}
-	d.challengeSvc = challenge.NewService(challengeIssuer, d.tokenIssuer, denyThreshold, ttl, &noopBeaconIngestor{})
+	d.challengeSvc = challenge.NewService(challengeIssuer, d.tokenIssuer, denyThreshold, ttl, beaconStore)
 
 	if cfg.Target != "" {
 		p, err := proxy.New(cfg.Target)
@@ -156,10 +159,6 @@ func buildDeps(cfg *appConfig) (*deps, error) {
 
 	return d, nil
 }
-
-type noopBeaconIngestor struct{}
-
-func (n *noopBeaconIngestor) Ingest(_ types.BehaviorBeacon) error { return nil }
 
 func buildMainHandler(d *deps) http.Handler {
 	mux := http.NewServeMux()
@@ -179,7 +178,13 @@ func buildMainHandler(d *deps) http.Handler {
 
 		hasValidToken := false
 		if cookieVal := token.GetCookie(r, token.DefaultCookieName); cookieVal != "" {
-			if _, err := d.tokenVerifier.Verify(cookieVal, token.VerifyContext{}); err == nil {
+			vctx := token.VerifyContext{
+				IP:  reqCtx.RemoteIP,
+				UA:  r.Header.Get("User-Agent"),
+				JA3: reqCtx.JA3,
+				JA4: reqCtx.JA4,
+			}
+			if _, err := d.tokenVerifier.Verify(cookieVal, vctx); err == nil {
 				hasValidToken = true
 				d.metrics.RecordPassToken("verified")
 			} else {

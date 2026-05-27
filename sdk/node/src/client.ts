@@ -8,13 +8,13 @@ export interface ClientOptions {
 
 function fallback(failOpen: boolean): Decision {
   return {
-    Verdict: failOpen ? 'ALLOW' : 'DENY',
-    Score: failOpen ? 0 : 100,
-    Signals: [],
-    Reasons: ['daemon_unavailable'],
-    PolicyName: '',
-    Timestamp: 0,
-    RequestID: '',
+    verdict: failOpen ? 'ALLOW' : 'DENY',
+    score: failOpen ? 0 : 100,
+    signals: [],
+    reasons: ['daemon_unavailable'],
+    policy_name: '',
+    timestamp: 0,
+    request_id: '',
   };
 }
 
