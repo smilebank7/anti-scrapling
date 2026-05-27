@@ -1,0 +1,10 @@
+# Tor exit node sample list — for testing only.
+# In production, replace with a regularly-updated list:
+# https://check.torproject.org/torbulkexitlist
+185.220.101.19
+185.220.101.20
+185.220.101.21
+185.220.101.32
+185.220.102.8
+45.142.212.100
+193.218.118.91

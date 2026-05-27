@@ -1,7 +1,7 @@
 .PHONY: build test test-race lint e2e js-bundle docker clean help
 
 BIN_DIR := bin
-GO := go
+GO := GOTOOLCHAIN=local go
 NPM := npm
 
 help:
