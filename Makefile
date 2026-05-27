@@ -28,7 +28,7 @@ js-bundle:
 
 e2e:
 	@echo "E2E tests run via docker-compose; see tests/scrapling/"
-	@cd tests/scrapling && docker compose up --abort-on-container-exit
+	@cd tests/scrapling && docker compose up --abort-on-container-exit --build
 
 docker:
 	docker build -f deploy/docker/Dockerfile -t anti-scrapling:dev .

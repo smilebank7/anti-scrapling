@@ -2,6 +2,8 @@
 
 This directory ships two ready-to-use policy files. Pick one as your starting point and tune from there.
 
+For the complete YAML schema reference with every field documented, see [docs/05-policy-reference.md](../docs/05-policy-reference.md).
+
 | File | Default action | PoW difficulty | Token TTL | Best for |
 |------|---------------|----------------|-----------|----------|
 | `default.yaml` | `challenge` | 4 | 24h | Most production sites |
@@ -229,3 +231,13 @@ Shorthand match keys (no `expr` needed):
 | `ip_category` | string | `ip.category == "..."` |
 | `score` | string | `score >= N` (any comparison operator) |
 | `ja3_in` | list | `ja3.matches_family([...])` |
+
+Multiple shorthand keys in one `match` block are ANDed together. For anything more complex, use `expr` with a full CEL expression.
+
+---
+
+## Related documentation
+
+- [Getting Started](../docs/04-getting-started.md) — how to run and verify the daemon
+- [Policy Reference](../docs/05-policy-reference.md) — complete YAML schema with all fields
+- [Operations](../docs/07-operations.md) — false-positive debugging and policy update procedure

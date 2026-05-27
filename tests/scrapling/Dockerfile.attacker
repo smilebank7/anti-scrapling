@@ -1,0 +1,29 @@
+FROM python:3.12-slim
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl ca-certificates && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+# Install core attack-surface dependencies first (always required)
+COPY requirements.txt .
+RUN pip install --no-cache-dir \
+    "pytest>=8" \
+    "pytest-asyncio>=0.23" \
+    "httpx>=0.27" \
+    "curl-cffi>=0.7" \
+    "requests>=2.31"
+
+# Scrapling itself — optional because the pip package name / version may differ from
+# the GitHub HEAD (D4Vinci/Scrapling@b31dc50).  If this fails the primary truth gate
+# (curl_cffi-based tests in test_l1_tls.py) still runs, since Scrapling's Fetcher
+# uses curl_cffi internally.
+RUN pip install --no-cache-dir scrapling==0.2.99 \
+    || pip install --no-cache-dir scrapling \
+    || echo "WARNING: scrapling not available on PyPI; test_scrapling_lib.py tests will be skipped automatically."
+
+COPY scenarios/ scenarios/
+COPY conftest.py .
+
+# Results directory owned by the container user so pytest can write junit.xml
+RUN mkdir -p /results

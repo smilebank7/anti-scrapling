@@ -1,0 +1,34 @@
+services:
+  upstream:
+    image: ealen/echo-server:latest
+    expose: ["3000"]
+    environment:
+      PORT: "3000"
+
+  daemon:
+    build:
+      context: ../..
+      dockerfile: deploy/docker/Dockerfile
+    expose: ["8080", "9090", "9091"]
+    environment:
+      AS_TARGET: http://upstream:3000
+    depends_on: [upstream]
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:8080/healthz"]
+      interval: 1s
+      timeout: 1s
+      retries: 30
+
+  attacker:
+    build:
+      context: .
+      dockerfile: Dockerfile.attacker
+    depends_on:
+      daemon:
+        condition: service_healthy
+    environment:
+      DAEMON_URL: http://daemon:8080
+      DECIDE_URL: http://daemon:9091
+    volumes:
+      - ./results:/results
+    command: ["python", "-m", "pytest", "-v", "--junitxml=/results/junit.xml", "scenarios/"]
