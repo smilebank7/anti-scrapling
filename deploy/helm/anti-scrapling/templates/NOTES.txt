@@ -1,0 +1,49 @@
+Anti-Scrapling has been deployed!
+
+Release: {{ .Release.Name }}
+Namespace: {{ .Release.Namespace }}
+
+ENDPOINTS
+---------
+Main proxy:  {{ .Values.service.type }} on port {{ .Values.service.port }}
+{{- if .Values.admin.enabled }}
+Admin API:   {{ .Values.admin.service.type }} on port {{ .Values.admin.service.port }}
+{{- end }}
+{{- if .Values.metrics.enabled }}
+Metrics:     ClusterIP on port {{ .Values.metrics.service.port }}
+{{- end }}
+
+POLICY
+------
+Active preset: {{ .Values.policy.preset }}
+
+{{- if .Values.ingress.enabled }}
+
+INGRESS
+-------
+{{- range .Values.ingress.hosts }}
+  http{{ if $.Values.ingress.tls }}s{{ end }}://{{ .host }}
+{{- end }}
+{{- else }}
+
+ACCESS (port-forward)
+---------------------
+  kubectl port-forward svc/{{ include "anti-scrapling.fullname" . }} 8080:{{ .Values.service.port }} -n {{ .Release.Namespace }}
+  curl http://localhost:8080/healthz
+{{- end }}
+
+{{- if not .Values.token.existingSecret }}
+
+TOKEN SECRET
+------------
+A random token secret was generated and stored in:
+  Secret: {{ include "anti-scrapling.fullname" . }}-token
+  Key:    {{ .Values.token.secretKey }}
+
+The secret is annotated with helm.sh/resource-policy: keep and will NOT be
+deleted on helm uninstall. Rotate it manually if needed.
+{{- end }}
+
+UPSTREAM
+--------
+Traffic is forwarded to: {{ .Values.upstream.target }}

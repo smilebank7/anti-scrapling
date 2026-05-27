@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"encoding/json"
 	"io"
 	"net/http"
 	"net/http/httptest"
@@ -12,6 +13,7 @@ import (
 	"time"
 
 	"github.com/anti-scrapling/anti-scrapling/internal/server"
+	"github.com/anti-scrapling/anti-scrapling/internal/types"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -137,5 +139,36 @@ func TestBuildAndServe(t *testing.T) {
 		assert.Equal(t, http.StatusOK, resp.StatusCode)
 		ct := resp.Header.Get("Content-Type")
 		assert.Contains(t, ct, "application/json")
+	})
+
+	t.Run("v1_decide_returns_decision", func(t *testing.T) {
+		body := strings.NewReader(`{"method":"GET","path":"/","host":"x","remote_ip":"1.2.3.4","headers":{},"header_order":[]}`)
+		resp, err := http.Post("http://"+adminAddr+"/v1/decide", "application/json", body)
+		require.NoError(t, err)
+		defer resp.Body.Close()
+		assert.Equal(t, http.StatusOK, resp.StatusCode)
+		assert.Contains(t, resp.Header.Get("Content-Type"), "application/json")
+		var dec types.Decision
+		require.NoError(t, json.NewDecoder(resp.Body).Decode(&dec))
+		assert.NotEmpty(t, dec.Verdict)
+		assert.NotEmpty(t, dec.RequestID)
+	})
+
+	t.Run("v1_decide_empty_body_is_400", func(t *testing.T) {
+		resp, err := http.Post("http://"+adminAddr+"/v1/decide", "application/json", strings.NewReader(""))
+		require.NoError(t, err)
+		defer resp.Body.Close()
+		assert.Equal(t, http.StatusBadRequest, resp.StatusCode)
+	})
+
+	t.Run("v1_policy_returns_yaml", func(t *testing.T) {
+		resp, err := http.Get("http://" + adminAddr + "/v1/policy")
+		require.NoError(t, err)
+		defer resp.Body.Close()
+		assert.Equal(t, http.StatusOK, resp.StatusCode)
+		assert.Contains(t, resp.Header.Get("Content-Type"), "yaml")
+		body, err := io.ReadAll(resp.Body)
+		require.NoError(t, err)
+		assert.Contains(t, string(body), "version:")
 	})
 }

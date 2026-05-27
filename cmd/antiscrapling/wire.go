@@ -9,6 +9,7 @@ import (
 	"os"
 	"time"
 
+	"github.com/anti-scrapling/anti-scrapling/internal/api"
 	"github.com/anti-scrapling/anti-scrapling/internal/cache"
 	"github.com/anti-scrapling/anti-scrapling/internal/challenge"
 	"github.com/anti-scrapling/anti-scrapling/internal/observability"
@@ -26,10 +27,11 @@ import (
 )
 
 type appConfig struct {
-	Policy  *types.PolicyConfig
-	Bind    string
-	Target  string
-	KeyFile string
+	Policy     *types.PolicyConfig
+	PolicyPath string
+	Bind       string
+	Target     string
+	KeyFile    string
 }
 
 type deps struct {
@@ -70,10 +72,11 @@ func loadConfig(configPath string) (*appConfig, error) {
 	}
 
 	return &appConfig{
-		Policy:  pol,
-		Bind:    bind,
-		Target:  target,
-		KeyFile: keyFile,
+		Policy:     pol,
+		PolicyPath: configPath,
+		Bind:       bind,
+		Target:     target,
+		KeyFile:    keyFile,
 	}, nil
 }
 
@@ -252,6 +255,20 @@ func buildAdminHandler(d *deps) http.Handler {
 	mux.Handle("/healthz", d.health.LivezHandler())
 	mux.Handle("/readyz", d.health.ReadyzHandler())
 	mux.Handle("/admin/audit", d.audit.HTTPHandler())
+	mux.Handle("POST /v1/decide", &api.DecideHandler{Pipeline: d.pl, Verifier: d.tokenVerifier})
+	mux.HandleFunc("GET /v1/policy", func(w http.ResponseWriter, r *http.Request) {
+		if d.cfg.PolicyPath == "" {
+			http.Error(w, "policy path not configured", http.StatusNotFound)
+			return
+		}
+		data, err := os.ReadFile(d.cfg.PolicyPath)
+		if err != nil {
+			http.Error(w, "failed to read policy: "+err.Error(), http.StatusInternalServerError)
+			return
+		}
+		w.Header().Set("Content-Type", "text/yaml; charset=utf-8")
+		_, _ = w.Write(data)
+	})
 	return mux
 }
 

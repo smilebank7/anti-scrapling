@@ -1,0 +1,17 @@
+{{- if and .Values.metrics.enabled .Values.metrics.podMonitor.enabled }}
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: {{ include "anti-scrapling.fullname" . }}
+  labels:
+    {{- include "anti-scrapling.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "anti-scrapling.selectorLabels" . | nindent 6 }}
+  podMetricsEndpoints:
+    - port: metrics
+      path: /metrics
+      interval: 30s
+      scrapeTimeout: 10s
+{{- end }}

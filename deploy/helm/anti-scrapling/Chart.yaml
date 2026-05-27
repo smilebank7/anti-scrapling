@@ -1,0 +1,11 @@
+apiVersion: v2
+name: anti-scrapling
+description: Anti-Scrapling security middleware
+type: application
+version: 0.1.0
+appVersion: "0.1.0"
+home: https://github.com/anti-scrapling/anti-scrapling
+icon: https://avatars.githubusercontent.com/u/0?s=200
+sources:
+  - https://github.com/anti-scrapling/anti-scrapling
+maintainers: []

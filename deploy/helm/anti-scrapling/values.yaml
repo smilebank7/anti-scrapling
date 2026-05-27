@@ -1,0 +1,81 @@
+image:
+  repository: ghcr.io/anti-scrapling/anti-scrapling
+  tag: "0.1.0"
+  pullPolicy: IfNotPresent
+
+replicaCount: 2
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+  limits:
+    cpu: 500m
+    memory: 512Mi
+
+service:
+  type: ClusterIP
+  port: 8080
+
+# Where to forward valid traffic. Required.
+upstream:
+  target: "http://upstream-service.default.svc.cluster.local:3000"
+
+policy:
+  # Use one of: default | strict | custom
+  preset: default
+  # If preset=custom, set policyYaml below
+  policyYaml: ""
+
+token:
+  # Provide via secret OR auto-generate on first start
+  existingSecret: ""
+  secretKey: token-key
+
+redis:
+  enabled: false
+  url: ""  # redis://host:6379/0
+
+metrics:
+  enabled: true
+  service:
+    port: 9090
+  podMonitor:
+    enabled: false
+
+admin:
+  enabled: true
+  service:
+    type: ClusterIP
+    port: 9091
+
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+  hosts:
+    - host: chart-example.local
+      paths: [/]
+  tls: []
+
+autoscaling:
+  enabled: false
+  minReplicas: 2
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 80
+
+podSecurityContext:
+  fsGroup: 65532
+  runAsNonRoot: true
+  runAsUser: 65532
+
+securityContext:
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop: [ALL]
+  readOnlyRootFilesystem: true
+
+nodeSelector: {}
+tolerations: []
+affinity: {}
+podAnnotations: {}
