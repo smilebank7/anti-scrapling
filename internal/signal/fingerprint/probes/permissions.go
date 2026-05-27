@@ -1,6 +1,6 @@
 package probes
 
-import "github.com/anti-scrapling/anti-scrapling/internal/types"
+import "github.com/smilebank7/anti-scrapling/internal/types"
 
 // Permissions scores inconsistent Permissions API spoofing.
 func Permissions(report types.FingerprintReport) []types.Signal {

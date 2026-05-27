@@ -1,8 +1,8 @@
 package fingerprint
 
 import (
-	"github.com/anti-scrapling/anti-scrapling/internal/signal/fingerprint/probes"
-	"github.com/anti-scrapling/anti-scrapling/internal/types"
+	"github.com/smilebank7/anti-scrapling/internal/signal/fingerprint/probes"
+	"github.com/smilebank7/anti-scrapling/internal/types"
 )
 
 type probeFamily func(types.FingerprintReport) []types.Signal

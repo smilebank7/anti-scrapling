@@ -1,5 +1,5 @@
 image:
-  repository: ghcr.io/anti-scrapling/anti-scrapling
+  repository: ghcr.io/smilebank7/anti-scrapling
   tag: "0.1.0"
   pullPolicy: IfNotPresent
 

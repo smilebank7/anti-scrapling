@@ -3,7 +3,7 @@ package main
 import (
 	"os"
 
-	"github.com/anti-scrapling/anti-scrapling/cmd/antiscrapling-cli/cmd"
+	"github.com/smilebank7/anti-scrapling/cmd/antiscrapling-cli/cmd"
 )
 
 func main() {

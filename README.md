@@ -2,9 +2,9 @@
 
 **Block modern scraping tools (Scrapling, curl-impersonate, undetected-playwright, camoufox) at the HTTP layer.**
 
-[![Build](https://img.shields.io/github/actions/workflow/status/anti-scrapling/anti-scrapling/ci.yml?branch=main)](https://github.com/anti-scrapling/anti-scrapling/actions)
+[![Build](https://img.shields.io/github/actions/workflow/status/smilebank7/anti-scrapling/ci.yml?branch=main)](https://github.com/smilebank7/anti-scrapling/actions)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue)](LICENSE)
-[![Version](https://img.shields.io/github/v/release/anti-scrapling/anti-scrapling)](https://github.com/anti-scrapling/anti-scrapling/releases)
+[![Version](https://img.shields.io/github/v/release/smilebank7/anti-scrapling)](https://github.com/smilebank7/anti-scrapling/releases)
 
 ---
 
@@ -58,7 +58,7 @@
 ```bash
 docker run -p 8080:8080 \
   -e AS_TARGET=http://your-app:3000 \
-  ghcr.io/anti-scrapling/anti-scrapling:latest
+  ghcr.io/smilebank7/anti-scrapling:latest
 ```
 
 Your app is now protected at `http://localhost:8080`. All traffic is proxied through the detection pipeline.
@@ -67,7 +67,7 @@ Your app is now protected at `http://localhost:8080`. All traffic is proxied thr
 
 ```bash
 helm repo add anti-scrapling https://anti-scrapling.github.io/charts
-helm install anti-scrapling anti-scrapling/anti-scrapling \
+helm install anti-scrapling smilebank7/anti-scrapling \
   --set config.target=http://your-app-service:3000 \
   --set config.tokenSecretFile=/etc/anti-scrapling/token.key
 ```

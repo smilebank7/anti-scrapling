@@ -6,8 +6,8 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/anti-scrapling/anti-scrapling/internal/signal/fingerprint"
-	"github.com/anti-scrapling/anti-scrapling/internal/types"
+	"github.com/smilebank7/anti-scrapling/internal/signal/fingerprint"
+	"github.com/smilebank7/anti-scrapling/internal/types"
 	"github.com/spf13/cobra"
 )
 

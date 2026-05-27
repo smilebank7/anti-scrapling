@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/anti-scrapling/anti-scrapling/internal/types"
+	"github.com/smilebank7/anti-scrapling/internal/types"
 )
 
 // BoundFields checks each field listed in bindTo against the current request context.

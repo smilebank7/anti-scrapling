@@ -12,8 +12,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/anti-scrapling/anti-scrapling/internal/server"
-	"github.com/anti-scrapling/anti-scrapling/internal/types"
+	"github.com/smilebank7/anti-scrapling/internal/server"
+	"github.com/smilebank7/anti-scrapling/internal/types"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

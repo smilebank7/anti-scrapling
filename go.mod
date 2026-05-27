@@ -1,4 +1,4 @@
-module github.com/anti-scrapling/anti-scrapling
+module github.com/smilebank7/anti-scrapling
 
 go 1.25.0
 

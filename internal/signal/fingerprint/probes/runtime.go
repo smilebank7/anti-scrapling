@@ -1,6 +1,6 @@
 package probes
 
-import "github.com/anti-scrapling/anti-scrapling/internal/types"
+import "github.com/smilebank7/anti-scrapling/internal/types"
 
 // Runtime scores native integrity and Playwright runtime signatures.
 func Runtime(report types.FingerprintReport) []types.Signal {

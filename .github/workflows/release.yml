@@ -7,7 +7,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: anti-scrapling/anti-scrapling
+  IMAGE_NAME: smilebank7/anti-scrapling
 
 jobs:
   docker:

@@ -3,7 +3,7 @@ package probes
 import (
 	"strings"
 
-	"github.com/anti-scrapling/anti-scrapling/internal/types"
+	"github.com/smilebank7/anti-scrapling/internal/types"
 )
 
 // Navigator scores navigator.* inconsistencies and known stealth defaults.

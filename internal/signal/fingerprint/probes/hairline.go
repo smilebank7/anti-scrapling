@@ -1,6 +1,6 @@
 package probes
 
-import "github.com/anti-scrapling/anti-scrapling/internal/types"
+import "github.com/smilebank7/anti-scrapling/internal/types"
 
 // Hairline scores the non-Modernizr sub-pixel rendering trap.
 func Hairline(report types.FingerprintReport) []types.Signal {

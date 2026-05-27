@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/anti-scrapling/anti-scrapling/internal/types"
+	"github.com/smilebank7/anti-scrapling/internal/types"
 )
 
 const (

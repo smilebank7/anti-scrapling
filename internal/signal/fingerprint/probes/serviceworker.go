@@ -1,6 +1,6 @@
 package probes
 
-import "github.com/anti-scrapling/anti-scrapling/internal/types"
+import "github.com/smilebank7/anti-scrapling/internal/types"
 
 // ServiceWorker scores service worker registration no-ops.
 func ServiceWorker(report types.FingerprintReport) []types.Signal {

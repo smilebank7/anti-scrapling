@@ -2,7 +2,7 @@
 
 ## Image
 
-`ghcr.io/anti-scrapling/anti-scrapling:<tag>`
+`ghcr.io/smilebank7/anti-scrapling:<tag>`
 
 Multi-stage build: Node 20 Alpine (JS bundle) → Go 1.25 Alpine (binaries) → Alpine 3.21 (runtime).
 
@@ -30,7 +30,7 @@ The default policy is baked in at `/etc/anti-scrapling/policy.yaml`. Override by
 docker run -p 8080:8080 \
   -e AS_TARGET=http://upstream:3000 \
   -v $(pwd)/my-policy.yaml:/etc/anti-scrapling/policy.yaml:ro \
-  ghcr.io/anti-scrapling/anti-scrapling:latest
+  ghcr.io/smilebank7/anti-scrapling:latest
 ```
 
 ## Quick start with docker compose

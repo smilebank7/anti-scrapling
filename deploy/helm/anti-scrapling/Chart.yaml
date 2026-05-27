@@ -4,8 +4,8 @@ description: Anti-Scrapling security middleware
 type: application
 version: 0.1.0
 appVersion: "0.1.0"
-home: https://github.com/anti-scrapling/anti-scrapling
+home: https://github.com/smilebank7/anti-scrapling
 icon: https://avatars.githubusercontent.com/u/0?s=200
 sources:
-  - https://github.com/anti-scrapling/anti-scrapling
+  - https://github.com/smilebank7/anti-scrapling
 maintainers: []

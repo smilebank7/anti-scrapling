@@ -3,7 +3,7 @@ package cmd
 import (
 	"fmt"
 
-	"github.com/anti-scrapling/anti-scrapling/internal/policy"
+	"github.com/smilebank7/anti-scrapling/internal/policy"
 	"github.com/spf13/cobra"
 )
 

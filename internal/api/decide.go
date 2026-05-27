@@ -7,9 +7,9 @@ import (
 	"net/url"
 	"time"
 
-	"github.com/anti-scrapling/anti-scrapling/internal/pipeline"
-	"github.com/anti-scrapling/anti-scrapling/internal/token"
-	"github.com/anti-scrapling/anti-scrapling/internal/types"
+	"github.com/smilebank7/anti-scrapling/internal/pipeline"
+	"github.com/smilebank7/anti-scrapling/internal/token"
+	"github.com/smilebank7/anti-scrapling/internal/types"
 	"github.com/google/uuid"
 )
 

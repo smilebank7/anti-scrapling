@@ -6,7 +6,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/anti-scrapling/anti-scrapling/internal/policy"
+	"github.com/smilebank7/anti-scrapling/internal/policy"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

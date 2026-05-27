@@ -1,6 +1,6 @@
 package probes
 
-import "github.com/anti-scrapling/anti-scrapling/internal/types"
+import "github.com/smilebank7/anti-scrapling/internal/types"
 
 // WebRTC scores missing local ICE candidates from the STUN probe.
 func WebRTC(report types.FingerprintReport) []types.Signal {

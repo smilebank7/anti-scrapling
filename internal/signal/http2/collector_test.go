@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/anti-scrapling/anti-scrapling/internal/types"
+	"github.com/smilebank7/anti-scrapling/internal/types"
 )
 
 func TestCollectorReturnsGracefullyWithoutHTTP2Frames(t *testing.T) {

@@ -1,6 +1,6 @@
 package probes
 
-import "github.com/anti-scrapling/anti-scrapling/internal/types"
+import "github.com/smilebank7/anti-scrapling/internal/types"
 
 // Speech scores missing speech synthesis voices on browsers with default voices.
 func Speech(report types.FingerprintReport) []types.Signal {

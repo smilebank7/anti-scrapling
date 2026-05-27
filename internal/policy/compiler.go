@@ -8,7 +8,7 @@ import (
 	"strings"
 	"sync"
 
-	itypes "github.com/anti-scrapling/anti-scrapling/internal/types"
+	itypes "github.com/smilebank7/anti-scrapling/internal/types"
 	"github.com/google/cel-go/cel"
 	celtypes "github.com/google/cel-go/common/types"
 	"github.com/google/cel-go/common/types/ref"

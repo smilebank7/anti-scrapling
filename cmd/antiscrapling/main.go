@@ -10,7 +10,7 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/anti-scrapling/anti-scrapling/internal/server"
+	"github.com/smilebank7/anti-scrapling/internal/server"
 )
 
 var Version = "dev"

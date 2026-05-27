@@ -3,8 +3,8 @@ package decision_test
 import (
 	"testing"
 
-	"github.com/anti-scrapling/anti-scrapling/internal/decision"
-	"github.com/anti-scrapling/anti-scrapling/internal/types"
+	"github.com/smilebank7/anti-scrapling/internal/decision"
+	"github.com/smilebank7/anti-scrapling/internal/types"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

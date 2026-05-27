@@ -1,6 +1,6 @@
 package probes
 
-import "github.com/anti-scrapling/anti-scrapling/internal/types"
+import "github.com/smilebank7/anti-scrapling/internal/types"
 
 // Fonts scores missing OS-bundled fonts for the claimed platform.
 func Fonts(report types.FingerprintReport) []types.Signal {

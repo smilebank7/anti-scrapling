@@ -86,7 +86,7 @@ helm install anti-scrapling ./deploy/helm/anti-scrapling \
 
 | Key | Default | Description |
 |-----|---------|-------------|
-| `image.repository` | `ghcr.io/anti-scrapling/anti-scrapling` | Container image repository |
+| `image.repository` | `ghcr.io/smilebank7/anti-scrapling` | Container image repository |
 | `image.tag` | `"0.1.0"` | Image tag (defaults to chart appVersion) |
 | `image.pullPolicy` | `IfNotPresent` | Image pull policy |
 | `replicaCount` | `2` | Number of replicas (ignored when autoscaling enabled) |

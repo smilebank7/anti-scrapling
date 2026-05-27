@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/anti-scrapling/anti-scrapling/internal/types"
+	"github.com/smilebank7/anti-scrapling/internal/types"
 	"github.com/golang-jwt/jwt/v5"
 )
 

@@ -1,6 +1,6 @@
 package probes
 
-import "github.com/anti-scrapling/anti-scrapling/internal/types"
+import "github.com/smilebank7/anti-scrapling/internal/types"
 
 // Codecs scores missing rare codec support for modern Chrome and Safari reports.
 func Codecs(report types.FingerprintReport) []types.Signal {

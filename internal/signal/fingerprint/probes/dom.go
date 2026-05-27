@@ -1,6 +1,6 @@
 package probes
 
-import "github.com/anti-scrapling/anti-scrapling/internal/types"
+import "github.com/smilebank7/anti-scrapling/internal/types"
 
 // DOM scores structural probes that expose automation framework patches.
 func DOM(report types.FingerprintReport) []types.Signal {

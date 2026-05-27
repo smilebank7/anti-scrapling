@@ -5,8 +5,8 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/anti-scrapling/anti-scrapling/internal/proxy"
-	"github.com/anti-scrapling/anti-scrapling/internal/token"
+	"github.com/smilebank7/anti-scrapling/internal/proxy"
+	"github.com/smilebank7/anti-scrapling/internal/token"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

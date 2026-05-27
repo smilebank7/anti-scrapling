@@ -1,6 +1,6 @@
 package behavior
 
-import "github.com/anti-scrapling/anti-scrapling/internal/types"
+import "github.com/smilebank7/anti-scrapling/internal/types"
 
 const (
 	turnstileMin = 100

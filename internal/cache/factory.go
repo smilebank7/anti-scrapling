@@ -3,7 +3,7 @@ package cache
 import (
 	"fmt"
 
-	"github.com/anti-scrapling/anti-scrapling/internal/types"
+	"github.com/smilebank7/anti-scrapling/internal/types"
 )
 
 // New constructs a Cache from cfg. Returns a memory cache when cfg is nil or

@@ -1,6 +1,6 @@
 package probes
 
-import "github.com/anti-scrapling/anti-scrapling/internal/types"
+import "github.com/smilebank7/anti-scrapling/internal/types"
 
 // Canvas scores seeded canvas noise by checking repeated-render variance.
 func Canvas(report types.FingerprintReport) []types.Signal {

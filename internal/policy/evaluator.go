@@ -3,7 +3,7 @@ package policy
 import (
 	"fmt"
 
-	"github.com/anti-scrapling/anti-scrapling/internal/types"
+	"github.com/smilebank7/anti-scrapling/internal/types"
 )
 
 type Action string

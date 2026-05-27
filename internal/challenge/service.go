@@ -10,9 +10,9 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/anti-scrapling/anti-scrapling/internal/signal/fingerprint"
-	"github.com/anti-scrapling/anti-scrapling/internal/token"
-	"github.com/anti-scrapling/anti-scrapling/internal/types"
+	"github.com/smilebank7/anti-scrapling/internal/signal/fingerprint"
+	"github.com/smilebank7/anti-scrapling/internal/token"
+	"github.com/smilebank7/anti-scrapling/internal/types"
 )
 
 const metaPlaceholder = `<meta name="__as_challenge" content='{"challenge_id":"","difficulty":0,"beacon_interval_ms":5000}'>`

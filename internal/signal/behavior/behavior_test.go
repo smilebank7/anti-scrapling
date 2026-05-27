@@ -5,7 +5,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/anti-scrapling/anti-scrapling/internal/signal/behavior"
+	"github.com/smilebank7/anti-scrapling/internal/signal/behavior"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

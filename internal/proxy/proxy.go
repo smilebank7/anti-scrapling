@@ -9,7 +9,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/anti-scrapling/anti-scrapling/internal/token"
+	"github.com/smilebank7/anti-scrapling/internal/token"
 	"golang.org/x/net/http2"
 )
 

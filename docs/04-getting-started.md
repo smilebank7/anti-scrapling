@@ -11,7 +11,7 @@ This guide walks you from zero to a running Anti-Scrapling instance in about fiv
 Pull the image:
 
 ```bash
-docker pull ghcr.io/anti-scrapling/anti-scrapling:latest
+docker pull ghcr.io/smilebank7/anti-scrapling:latest
 ```
 
 The image is ~25-35 MB (Alpine runtime, statically-linked Go binary).
@@ -21,7 +21,7 @@ The image is ~25-35 MB (Alpine runtime, statically-linked Go binary).
 Requirements: Go 1.23+, Node.js 20+, Make.
 
 ```bash
-git clone https://github.com/anti-scrapling/anti-scrapling.git
+git clone https://github.com/smilebank7/anti-scrapling.git
 cd anti-scrapling
 
 # Build the JS challenge bundle first, then the Go binaries
@@ -88,7 +88,7 @@ docker run -p 8080:8080 \
   -e AS_TARGET=http://your-app:3000 \
   -v $(pwd)/token.key:/etc/anti-scrapling/token.key:ro \
   -v $(pwd)/my-policy.yaml:/etc/anti-scrapling/policy.yaml:ro \
-  ghcr.io/anti-scrapling/anti-scrapling:latest
+  ghcr.io/smilebank7/anti-scrapling:latest
 ```
 
 The proxy listens on port 8080. Your app is now behind the detection pipeline.

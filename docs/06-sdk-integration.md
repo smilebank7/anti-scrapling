@@ -21,7 +21,7 @@ Or with Docker (admin port is `:9091` by default — expose it explicitly):
 ```bash
 docker run -p 8080:8080 -p 9091:9091 \
   -e AS_TARGET=http://your-app:3000 \
-  ghcr.io/anti-scrapling/anti-scrapling:latest
+  ghcr.io/smilebank7/anti-scrapling:latest
 ```
 
 The daemon's proxy port (8080) is not used in SDK mode. Only the admin/decision API port (9091) matters.

@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"sort"
 
-	"github.com/anti-scrapling/anti-scrapling/internal/policy"
-	"github.com/anti-scrapling/anti-scrapling/internal/types"
+	"github.com/smilebank7/anti-scrapling/internal/policy"
+	"github.com/smilebank7/anti-scrapling/internal/types"
 	"github.com/spf13/cobra"
 )
 

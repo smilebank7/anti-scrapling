@@ -14,8 +14,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/anti-scrapling/anti-scrapling/internal/token"
-	"github.com/anti-scrapling/anti-scrapling/internal/types"
+	"github.com/smilebank7/anti-scrapling/internal/token"
+	"github.com/smilebank7/anti-scrapling/internal/types"
 )
 
 func newTestService(t *testing.T, difficulty, threshold int) *Service {

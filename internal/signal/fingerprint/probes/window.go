@@ -1,6 +1,6 @@
 package probes
 
-import "github.com/anti-scrapling/anti-scrapling/internal/types"
+import "github.com/smilebank7/anti-scrapling/internal/types"
 
 // Window scores geometry signatures exposed by stealth patches.
 func Window(report types.FingerprintReport) []types.Signal {

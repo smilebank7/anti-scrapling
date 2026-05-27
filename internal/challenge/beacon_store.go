@@ -6,8 +6,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/anti-scrapling/anti-scrapling/internal/signal/behavior"
-	"github.com/anti-scrapling/anti-scrapling/internal/types"
+	"github.com/smilebank7/anti-scrapling/internal/signal/behavior"
+	"github.com/smilebank7/anti-scrapling/internal/types"
 )
 
 const (
