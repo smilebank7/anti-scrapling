@@ -156,11 +156,18 @@ func (p *Pipeline) buildEvalFn() func(decision.EvalCtx) decision.EvalResult {
 
 func computeCacheKey(req types.RequestContext, hasValidToken bool) string {
 	ua := ""
+	path := ""
 	if req.Request != nil {
 		ua = req.Request.UserAgent()
+		if req.Request.URL != nil {
+			path = req.Request.URL.Path
+		}
 	}
 	uaDigest := sha256.Sum256([]byte(ua))
-	raw := fmt.Sprintf("%s\x00%s\x00%x\x00%v", req.RemoteIP, req.JA3, uaDigest[:8], hasValidToken)
+	// Path must be part of the cache key because policy rules can match on path
+	// (e.g. /healthz allow, /__as/* allow) — without it, the first request from
+	// an IP would shadow subsequent requests on different paths.
+	raw := fmt.Sprintf("%s\x00%s\x00%x\x00%s\x00%v", req.RemoteIP, req.JA3, uaDigest[:8], path, hasValidToken)
 	digest := sha256.Sum256([]byte(raw))
 	return fmt.Sprintf("%x", digest)
 }
