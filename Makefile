@@ -1,8 +1,10 @@
 .PHONY: build test test-race lint e2e js-bundle docker clean help
 
 BIN_DIR := bin
-GO := GOTOOLCHAIN=local go
+GO := go
 NPM := npm
+# Allow Go toolchain auto-download for deps requiring newer Go
+export GOTOOLCHAIN ?= auto
 
 help:
 	@echo "Targets: build test test-race lint e2e js-bundle docker clean"
